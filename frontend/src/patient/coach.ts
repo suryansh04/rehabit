@@ -1,7 +1,7 @@
 // Same lines as CLAUDE.md. Each one is recorded once on ElevenLabs as public/clips/<id>.mp3.
 export const COACH_LINES = {
   start: 'Chaliye shuru karte hain!',
-  streak: 'Bahut badhiya! Aise hi karte raho.',
+  streak: 'Bohot badhiya!',
   miss: 'Koi baat nahi, agla try karo.',
   last5: 'Bas 5 aur! Aap kar sakte ho.',
   end: 'Shabash! Aaj ka session poora hua.',

@@ -32,7 +32,7 @@ An AI phone call reminds the patient just before each daily session.
    | When | Clip |
    | --- | --- |
    | Game start | "Chaliye shuru karte hain!" |
-   | 5 correct taps in a row | "Bahut badhiya! Aise hi karte raho." |
+   | 5 correct taps in a row | "Bohot badhiya!" |
    | A miss | "Koi baat nahi, agla try karo." |
    | Last 5 taps | "Bas 5 aur! Aap kar sakte ho." |
    | Game end | "Shabash! Aaj ka session poora hua." |
