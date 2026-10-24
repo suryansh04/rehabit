@@ -101,7 +101,7 @@ def _demo_session(mode: str, day_index: int, start: datetime) -> dict:
         taps, duration, score = correct + random.randint(2, 6), 60.0, correct
     elif mode == "finger":
         score = round(score * 0.9)
-    return {"mode": mode, "hand": "left" if day_index == 4 else "right",
+    return {"mode": mode, "hand": "right" if day_index == 4 else "left",
             "started_at": start.isoformat(timespec="seconds"), "duration_s": duration, "taps": taps,
             "correct": correct, "avg_reaction_ms": reaction, "accuracy": round(correct / taps * 100, 1), "score": score}
 

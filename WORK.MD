@@ -229,7 +229,7 @@ void loop() {
   static unsigned long last = 0;
   if (millis() - last > 2000 && ws.isConnected()) {
     last = millis();
-    String msg = String("{\"type\":\"tap\",\"pad\":3,\"hand\":\"right\",\"ms\":") + millis() + "}";
+    String msg = String("{\"type\":\"tap\",\"pad\":3,\"hand\":\"left\",\"ms\":") + millis() + "}";
     ws.sendTXT(msg);
   }
 }
@@ -270,13 +270,13 @@ Join the touch code (D), the switch code (E) and the WebSocket code (F). On each
 Tap:
 
 ```json
-{ "type": "tap", "pad": 3, "hand": "right", "ms": 123456 }
+{ "type": "tap", "pad": 3, "hand": "left", "ms": 123456 }
 ```
 
 Hold. Send this when the palm pad (6) stays touched for 2 seconds:
 
 ```json
-{ "type": "hold", "pad": 6, "hand": "right", "ms": 123456 }
+{ "type": "hold", "pad": 6, "hand": "left", "ms": 123456 }
 ```
 
 ---

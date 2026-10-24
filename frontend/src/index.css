@@ -71,6 +71,14 @@ body {
   mask-image: linear-gradient(to bottom, transparent, black 40px);
 }
 
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .msg-in, .word-in { animation: none; }
 }

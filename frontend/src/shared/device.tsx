@@ -11,8 +11,8 @@ const DeviceContext = createContext<Device | null>(null)
 // or from keys 1-6 when no board is around.
 export function DeviceProvider({ children }: { children: ReactNode }) {
   const listeners = useRef(new Set<Listener>())
-  const handRef = useRef<Hand>('right')
-  const [hand, setHand] = useState<Hand>('right')
+  const handRef = useRef<Hand>('left')
+  const [hand, setHand] = useState<Hand>('left')
   const [connected, setConnected] = useState(false)
 
   useEffect(() => {

@@ -1,34 +1,43 @@
 import { ConversationProvider, useConversation, type MessagePayload } from '@elevenlabs/react'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { getCompanionToken } from '../shared/api'
-import { HandBoard } from '../shared/HandBoard'
-import { Ring } from '../shared/Ring'
 import { Pill, TopBar } from '../shared/TopBar'
-import { PALM_PAD, TAPS_PER_GAME } from '../shared/config'
-import { useDevice } from '../shared/device'
 import { Button } from '../shared/ui'
 import { Ankur } from './ankur/Ankur'
+import { SpeechClock } from './speechClock'
 import { VoiceBars } from './VoiceBars'
 
 const COMPANION = 'Yash'
-// about the pace of Yash's Hindi speech, so the words appear as he says them
-const WORD_MS = 330
+// with no timing data from ElevenLabs, show the whole line after this long
+const NO_TIMING_MS = 2500
 // voice tags like [happy] steer the voice; the patient should not read them
 const VOICE_TAG = /\[[a-z ]+\]\s*/gi
-const BUBBLE = 'msg-in max-w-[85%] rounded-[22px] px-5 py-3.5 text-[17px] leading-relaxed font-normal'
+const BUBBLE = 'msg-in max-w-[80%] rounded-[24px] px-6 py-4 text-lg leading-relaxed font-normal'
 
 type Line = { id: number; from: 'user' | 'bot'; text: string }
 
-// Shows Yash's newest line word by word at his speaking pace. Older lines show in full.
-function YashLine({ text, active }: { text: string; active: boolean }) {
+// Shows each word of Yash's newest line the moment he says it. Older lines show in full.
+function YashLine({ text, active, clock }: { text: string; active: boolean; clock: SpeechClock }) {
   const words = text.replace(VOICE_TAG, '').trim().split(' ')
-  const [count, setCount] = useState(1)
+  const [count, setCount] = useState(0)
 
   useEffect(() => {
     if (!active) return
-    const timer = setInterval(() => setCount((c) => Math.min(words.length, c + 1)), WORD_MS)
-    return () => clearInterval(timer)
-  }, [active, words.length])
+    // where each word begins in the line, counted in characters
+    const wordStarts = words.map((_, i) => words.slice(0, i).join(' ').length + (i ? 1 : 0))
+    const shownAt = performance.now()
+    let frame = 0
+    const tick = () => {
+      const now = performance.now()
+      const { spoken, started, finished } = clock.read(now)
+      const all = finished || (!started && now - shownAt > NO_TIMING_MS)
+      setCount(all ? words.length : wordStarts.filter((start) => start < spoken).length)
+      if (!all) frame = requestAnimationFrame(tick)
+    }
+    tick()
+    return () => cancelAnimationFrame(frame)
+    // the words only change with the text
+  }, [active, text, clock])
 
   return (
     <p className={`${BUBBLE} self-start rounded-bl-md bg-surface text-ink/80 shadow-[0_2px_10px_rgb(27_21_48/0.05)]`}>
@@ -66,8 +75,8 @@ export function TalkScreen({ onEnd }: { onEnd: () => void }) {
 }
 
 function Talk({ onEnd }: { onEnd: () => void }) {
-  const { hand } = useDevice()
   const [lines, setLines] = useState<Line[]>([])
+  const [clock] = useState(() => new SpeechClock())
   const [error, setError] = useState<string | null>(null)
   const ended = useRef(false)
   const { scroller, content } = useStickToBottom()
@@ -79,8 +88,12 @@ function Talk({ onEnd }: { onEnd: () => void }) {
   }
 
   const conversation = useConversation({
-    onMessage: ({ role, message }: MessagePayload) =>
-      setLines((all) => [...all, { id: all.length, from: role === 'user' ? 'user' : 'bot', text: message }]),
+    onMessage: ({ role, message }: MessagePayload) => {
+      // Yash's text arrives just before his audio, so a new line starts a fresh timeline
+      if (role !== 'user') clock.reset()
+      setLines((all) => [...all, { id: all.length, from: role === 'user' ? 'user' : 'bot', text: message }])
+    },
+    onAudioAlignment: (alignment) => clock.add(alignment),
     onError: (message) => setError(message),
     // Yash hangs up himself (End call tool or the 3 minute cap). Our own endSession is reason "user".
     onDisconnect: (details) => {
@@ -128,37 +141,39 @@ function Talk({ onEnd }: { onEnd: () => void }) {
   const lastBot = lines.findLast((line) => line.from === 'bot')?.id
 
   return (
-    <div className="flex h-screen flex-col gap-6 px-10 py-8">
+    <div className="flex h-screen flex-col gap-4 px-10 py-8">
       <TopBar left={<Pill><b>Talk time</b></Pill>} right={<Button small onClick={end}>End talk</Button>} />
-      <main className="grid min-h-0 flex-1 grid-cols-[auto_1fr] items-center gap-12">
-        <Ring lit={0} total={TAPS_PER_GAME} size={560} showTicks={false}>
-          <HandBoard hand={hand} size={320} live={PALM_PAD} />
-        </Ring>
-        <div className="flex h-[78vh] max-w-xl flex-col gap-4">
-          <div className="flex items-center gap-4">
-            {/* Yash is the voice; Ankur only listens along */}
-            <Ankur state="listen" size={72} />
-            <div>
-              <h1 className="text-[30px] font-bold tracking-tight">{heading}</h1>
-              <p className="text-muted">Speak in Hindi or English. Take your time.</p>
-            </div>
+      <main className="mx-auto flex min-h-0 w-full max-w-3xl flex-1 flex-col gap-5">
+        <div ref={scroller} className="chat-fade no-scrollbar min-h-0 flex-1 overflow-y-auto">
+          <div ref={content} className="flex min-h-full flex-col justify-end gap-3 pt-12 pb-2">
+            {lines.length === 0 && (
+              <div className="msg-in m-auto flex flex-col items-center gap-3 text-center">
+                <Ankur state="listen" size={140} />
+                <p className="text-lg text-muted">{COMPANION} will say namaste in a moment.</p>
+              </div>
+            )}
+            {lines.map((line) =>
+              line.from === 'bot' ? (
+                <YashLine key={line.id} text={line.text} active={line.id === lastBot} clock={clock} />
+              ) : (
+                <p key={line.id} className={`${BUBBLE} self-end rounded-br-md bg-lilac text-accent-ink`}>
+                  {line.text}
+                </p>
+              ),
+            )}
           </div>
-          <div ref={scroller} className="chat-fade min-h-0 flex-1 overflow-y-auto">
-            <div ref={content} className="flex min-h-full flex-col justify-end gap-3 pt-10 pb-2">
-              {lines.map((line) =>
-                line.from === 'bot' ? (
-                  <YashLine key={line.id} text={line.text} active={line.id === lastBot} />
-                ) : (
-                  <p key={line.id} className={`${BUBBLE} self-end rounded-br-md bg-lilac text-accent-ink`}>
-                    {line.text}
-                  </p>
-                ),
-              )}
-            </div>
+        </div>
+        {/* Yash is the voice; Ankur only listens along */}
+        <footer className="flex items-center gap-5 rounded-card bg-surface px-6 py-4 shadow-soft">
+          <Ankur state="listen" size={64} />
+          <div className="min-w-0 flex-1">
+            <h1 className="text-2xl font-bold tracking-tight">{heading}</h1>
+            <p className="text-muted">
+              {error ? <span className="text-error">{error}</span> : 'Speak in Hindi or English. Take your time.'}
+            </p>
           </div>
           <VoiceBars state={voice} read={read} />
-          {error && <p className="text-error">{error}</p>}
-        </div>
+        </footer>
       </main>
     </div>
   )

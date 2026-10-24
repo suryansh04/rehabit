@@ -4,6 +4,7 @@ import type { Flash } from '../../shared/HandBoard'
 import { useDeviceEvents } from '../../shared/device'
 import type { Hand, ModeId } from '../../shared/types'
 import { LAST_STRETCH, STREAK_EVERY } from '../coach'
+import { playHitSound } from '../tapSound'
 import { MODES, type FinishHandler, type GameModel } from './modes'
 import { buildResult, END_DELAY_MS, pickPad, START_DELAY_MS, useGameKit } from './useGameKit'
 
@@ -109,6 +110,7 @@ export function useTapGame(id: ModeId, hand: Hand, onFinish: FinishHandler): Gam
       bump()
       return
     }
+    playHitSound()
     g.lastMs = Math.round(performance.now() - g.shownAt)
     g.reactions.push(g.lastMs)
     g.good += 1
@@ -130,7 +132,7 @@ export function useTapGame(id: ModeId, hand: Hand, onFinish: FinishHandler): Gam
       ? { label: 'Seconds left', value: Math.ceil(g.startedAt ? secondsLeft() : ENDURANCE_SECONDS) }
       : { label: 'Good taps', value: g.good, total: TAPS_PER_GAME },
     stats: [
-      { label: 'This tap', value: g.lastMs ?? '-', unit: g.lastMs ? 'ms' : undefined },
+      { label: 'This tap', value: g.lastMs ?? '-', unit: g.lastMs ? 'ms' : undefined, since: g.target === null ? undefined : g.shownAt },
       { label: timed ? 'Good taps' : 'In a row', value: timed ? g.good : g.streak },
       { label: 'Misses', value: g.misses },
     ],

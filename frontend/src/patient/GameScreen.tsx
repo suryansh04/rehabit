@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react'
 import { HandBoard } from '../shared/HandBoard'
 import { Ring } from '../shared/Ring'
 import { Pill, TopBar } from '../shared/TopBar'
@@ -7,7 +8,7 @@ import { Button, StatTile } from '../shared/ui'
 import { AnkurSays } from './ankur/ThoughtCloud'
 import { useGameAnkur } from './ankur/useGameAnkur'
 import { COACH_LINES } from './coach'
-import { MODES, type FinishHandler, type GameModel } from './games/modes'
+import { MODES, type FinishHandler, type GameModel, type StatView } from './games/modes'
 import { useMemoryGame } from './games/useMemoryGame'
 import { useTapGame } from './games/useTapGame'
 import { useCoach, type Voice } from './useCoach'
@@ -22,6 +23,27 @@ type Props = { mode: ModeId; onFinish: FinishHandler; onStop: () => void }
 function cloudText({ speaking, waiting }: Voice) {
   if (waiting) return null
   return speaking ? COACH_LINES[speaking] : undefined
+}
+
+// Counts up every frame without re-rendering the game.
+function LiveMs({ since }: { since: number }) {
+  const out = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    let frame = 0
+    const tick = () => {
+      if (out.current) out.current.textContent = String(Math.round(performance.now() - since))
+      frame = requestAnimationFrame(tick)
+    }
+    tick()
+    return () => cancelAnimationFrame(frame)
+  }, [since])
+
+  return <span ref={out}>0</span>
+}
+
+function tileProps({ since, ...stat }: StatView) {
+  return since === undefined ? stat : { ...stat, value: <LiveMs since={since} />, unit: 'ms' }
 }
 
 export function GameScreen(props: Props) {
@@ -66,7 +88,7 @@ function GameView({ mode, hand, model, onStop }: { mode: ModeId; hand: Hand; mod
         </Ring>
         <div className="flex flex-col gap-3.5">
           {model.stats.map((stat, i) => (
-            <StatTile key={stat.label} tone={TONES[i]} {...stat} />
+            <StatTile key={stat.label} tone={TONES[i]} {...tileProps(stat)} />
           ))}
         </div>
       </main>

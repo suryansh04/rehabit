@@ -28,7 +28,7 @@ async def auto_taps(ws, hand: str) -> None:
 
 
 async def main() -> None:
-    hand, auto = "right", None
+    hand, auto = "left", None
     async with websockets.connect(URL) as ws:
         print(__doc__)
         while True:
