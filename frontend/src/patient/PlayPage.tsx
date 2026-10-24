@@ -60,7 +60,7 @@ export function PlayPage() {
       {screen.name === 'done' && (
         <DoneScreen result={screen.result} streak={streak} saveError={screen.saveError} onAgain={start} onMenu={menu} />
       )}
-      {screen.name === 'talk' && <TalkScreen onEnd={() => setScreen({ name: 'mood' })} />}
+      {screen.name === 'talk' && <TalkScreen config={config} onEnd={() => setScreen({ name: 'mood' })} />}
       {screen.name === 'mood' && <MoodScreen onDone={menu} />}
     </DeviceProvider>
   )

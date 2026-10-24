@@ -1,3 +1,4 @@
+import asyncio
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -7,13 +8,16 @@ import api
 import db
 import ws
 from config import settings
+from scheduler import run_scheduler
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     db.init_db()
     db.seed_demo()
+    scheduler = asyncio.create_task(run_scheduler())
     yield
+    scheduler.cancel()
 
 
 app = FastAPI(title="Rehabit", lifespan=lifespan)

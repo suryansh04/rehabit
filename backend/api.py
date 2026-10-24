@@ -1,11 +1,14 @@
 from datetime import datetime, timedelta
 from typing import Literal
 
-from fastapi import APIRouter
+import httpx
+from fastapi import APIRouter, HTTPException, Request, Response
 from pydantic import BaseModel, Field
 
 import db
+import sarvam
 from config import settings
+from whatsapp import send_whatsapp
 
 LOW_MOOD_MAX = 2
 
@@ -43,7 +46,26 @@ def get_sessions():
 @router.post("/mood")
 def save_mood(body: MoodIn):
     mood_id, session_id = db.add_mood(body.score)
+    if body.score <= LOW_MOOD_MAX:
+        send_whatsapp("low_mood", {"score": body.score, "patient": settings.patient_name})
     return {"id": mood_id, "session_id": session_id}
+
+
+@router.post("/call-now")
+async def call_now():
+    try:
+        return {"attempt_id": await sarvam.start_reminder_call()}
+    except (RuntimeError, httpx.HTTPError) as error:
+        raise HTTPException(status_code=502, detail=str(error))
+
+
+@router.get("/sarvam/{path:path}")
+async def sarvam_proxy(path: str, request: Request):
+    try:
+        res = await sarvam.proxy_get(path, request.url.query)
+    except (RuntimeError, httpx.HTTPError) as error:
+        raise HTTPException(status_code=502, detail=str(error))
+    return Response(res.content, status_code=res.status_code, media_type=res.headers.get("content-type"))
 
 
 @router.get("/config")
