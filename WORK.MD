@@ -38,7 +38,7 @@ If time is short, cut from the bottom.
 5. **Save sessions.** `POST /api/session`. Then a basic dashboard that lists sessions.
 6. **Other game modes.** Finger isolation, Memory sequence, Endurance.
 7. **Left and right hand mode.** Read the `hand` field in each message.
-8. **Voice coach.** Make audio clips with Sarvam TTS before the demo. Play a clip on events, such as streaks and the last 5 taps.
+8. **Voice coach.** Make the 5 audio clips on the ElevenLabs website before the demo (a cute, cheerful voice; Sarvam voices sounded too mature). Save them as `frontend/public/clips/<id>.mp3`. Play a clip on events, such as streaks and the last 5 taps.
 9. **AI companion.** Sarvam web SDK in the browser. The patient clicks "Start session" once first (browsers need a click for audio and microphone). Then a 2 second palm hold starts the talk. Never put the Sarvam key in the browser. Use a backend proxy. Save the mood score with `POST /api/mood`.
 10. **Reminder call.** A timer in the backend. At `REMINDER_MINUTES_BEFORE` minutes before `SESSION_TIME`, call `PATIENT_PHONE` with the Sarvam Instant Outbound API. The call says a game session is coming up. Add a "Call now" button on the dashboard for the demo. This needs a phone number and a connection in the Sarvam workspace. Set this up early. If it fails, play a recorded call in the demo.
 11. **WhatsApp events.** Write `send_whatsapp(event, data)`. It sends the 3 events through the chosen provider (OmniDimension or Meta Cloud API). Start with a stub that prints the message.

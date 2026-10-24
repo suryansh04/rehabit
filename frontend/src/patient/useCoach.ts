@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import type { Cue } from './coach'
 
-const clipUrl = (clip: Cue['clip']) => `/clips/${clip}.wav`
+const clipUrl = (clip: Cue['clip']) => `/clips/${clip}.mp3`
 
 // Plays the voice clip for each new cue. A new clip cuts off the one before it.
 export function useCoach(cue: Cue | null) {

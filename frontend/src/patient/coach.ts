@@ -1,4 +1,4 @@
-// Same lines as CLAUDE.md. make_clips.py turns each one into public/clips/<id>.wav.
+// Same lines as CLAUDE.md. Each one is recorded once on ElevenLabs as public/clips/<id>.mp3.
 export const COACH_LINES = {
   start: 'Chaliye shuru karte hain!',
   streak: 'Bahut badhiya! Aise hi karte raho.',
