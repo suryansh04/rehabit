@@ -13,7 +13,7 @@ Font: Plus Jakarta Sans 500 / 700. Pill buttons, 28px card corners, soft shadow.
 ## Hand drawing
 
 A right hand seen from above, so the thumb is on the left. The middle finger is the longest, the fingers fan out, and the thumb sits low on the palm. The coins are on the fingertip pads and in the palm center. The left hand is the mirror image.
-The source is `scratchpad/hand.py` for now. It becomes `frontend/src/shared/HandBoard.tsx`.
+The source is `design/hand/hand.py`. It becomes `frontend/src/shared/HandBoard.tsx`.
 
 ## Layout (chosen in round 3)
 
