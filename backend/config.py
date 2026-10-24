@@ -6,7 +6,8 @@ ROOT = Path(__file__).resolve().parent.parent
 
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=ROOT / ".env", extra="ignore")
+    # empty values in .env fall back to the defaults below
+    model_config = SettingsConfigDict(env_file=ROOT / ".env", extra="ignore", env_ignore_empty=True)
 
     sarvam_api_key: str = ""
     sarvam_org_id: str = ""
