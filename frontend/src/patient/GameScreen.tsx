@@ -10,13 +10,19 @@ import { COACH_LINES } from './coach'
 import { MODES, type FinishHandler, type GameModel } from './games/modes'
 import { useMemoryGame } from './games/useMemoryGame'
 import { useTapGame } from './games/useTapGame'
-import { useCoach } from './useCoach'
+import { useCoach, type Voice } from './useCoach'
 
 const RING_SIZE = 600
 const HAND_SIZE = 320
 const TONES = ['mint', 'peach', 'lilac'] as const
 
 type Props = { mode: ModeId; onFinish: FinishHandler; onStop: () => void }
+
+// The cloud follows the audio: dots while a line waits, the text once it is spoken.
+function cloudText({ speaking, waiting }: Voice) {
+  if (waiting) return null
+  return speaking ? COACH_LINES[speaking] : undefined
+}
 
 export function GameScreen(props: Props) {
   const { hand } = useDevice()
@@ -34,7 +40,7 @@ function MemoryGame({ mode, hand, onFinish, onStop }: GameProps) {
 }
 
 function GameView({ mode, hand, model, onStop }: { mode: ModeId; hand: Hand; model: GameModel; onStop: () => void }) {
-  useCoach(model.cue)
+  const voice = useCoach(model.cue)
   const ankur = useGameAnkur(model)
   const { counter } = model
 
@@ -52,7 +58,7 @@ function GameView({ mode, hand, model, onStop }: { mode: ModeId; hand: Hand; mod
             {counter.total && <small className="text-3xl font-medium text-muted"> / {counter.total}</small>}
           </span>
           <div className="mt-8">
-            <AnkurSays state={ankur} size={150} text={model.cue ? COACH_LINES[model.cue.clip] : null} sayKey={model.cue?.n} />
+            <AnkurSays state={ankur} size={150} text={cloudText(voice)} lineKey={voice.key} />
           </div>
         </div>
         <Ring lit={model.ring.lit} total={model.ring.total} size={RING_SIZE}>
