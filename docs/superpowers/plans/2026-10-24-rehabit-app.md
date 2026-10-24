@@ -55,7 +55,7 @@ frontend/src/
 ## Contracts used across tasks
 
 - Device message (in and out): `{"type": "tap" | "hold", "pad": 1-6, "hand": "left" | "right", "ms": number}`
-- `POST /api/session` body: `{mode, hand, started_at, duration_s, taps, correct, avg_reaction_ms, accuracy, score}` returns `{id}`
+- `POST /api/session` body: `{mode, hand, duration_s, taps, correct, avg_reaction_ms, accuracy, score}` returns `{id}`. The server sets `started_at` (now minus duration), so one clock drives the schedule
 - `GET /api/sessions` returns `[{...session, id, mood: number | null}]`, newest first
 - `POST /api/mood` body `{score: 1-5}` returns `{id, session_id}`. If the score is 2 or lower, it calls `send_whatsapp("low_mood", {...})`.
 - `POST /api/call-now` returns `{attempt_id}`
