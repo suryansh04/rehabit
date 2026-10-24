@@ -22,6 +22,10 @@ async def start_reminder_call() -> str:
                 "connection_id": settings.sarvam_connection_id,
                 "agent_phone_number": settings.sarvam_agent_phone_number,
             },
+            "agent_variables": {
+                "patient_name": settings.patient_name,
+                "session_time": settings.session_time,
+            },
         },
         "user_config": {"user_phone_number": settings.patient_phone},
     }
