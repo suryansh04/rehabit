@@ -27,8 +27,8 @@ Rehabit uses a cardboard board with six coins and an ESP32, for about ₹1,000 i
 - **Live feedback**: a timer counts each reaction in milliseconds while a coin glows, and a soft chime plays on a correct tap.
 - **Left or right hand**: every tap carries the hand in use. Our demo board is a left hand.
 - **Voice coach and mascot**: Ankur, a sprout in a clay pot, cheers the patient on with short Hinglish voice lines.
-- **AI companion (Yash)**: holding the palm coin for 2 seconds, or tapping Ankur on the menu, starts a short voice chat in Hindi about how the patient feels. The patient then rates their mood by tapping a coin from 1 to 5.
-- **Reminder call (Ishu)**: an AI phone call reminds the patient a few minutes before the daily session.
+- **AI companion (Rehabit AI)**: holding the palm coin for 2 seconds, or tapping Ankur on the menu, starts a short voice chat in Hindi about how the patient feels. The patient then rates their mood by tapping a coin from 1 to 5.
+- **Reminder call (Rehab AI)**: an AI phone call reminds the patient a few minutes before the daily session.
 - **Family updates**: a daily summary, plus alerts for a missed session or a low mood.
 - **Therapist dashboard**: progress per game, mood vs reaction time, and full session history.
 
@@ -63,10 +63,6 @@ Holding the palm coin for 2 seconds sends `"type": "hold"`, which starts the com
 | Power | USB from a laptop or power bank |
 | Cost | About ₹1,000 per board |
 
-| Pad | Thumb | Index | Middle | Ring | Little | Palm |
-| --- | --- | --- | --- | --- | --- | --- |
-| GPIO | 4 | 13 | 14 | 27 | 32 | 33 |
-
 The firmware calibrates every pad at boot, sends one message per touch with a 150 ms debounce, and reconnects to the backend on its own if Wi-Fi or the server drops.
 
 ## Tech stack
@@ -76,7 +72,7 @@ The firmware calibrates every pad at boot, sends one message per touch with a 15
 | Firmware | PlatformIO, Arduino framework, WebSockets, ArduinoJson |
 | Backend | Python, FastAPI, SQLite |
 | Frontend | React, TypeScript, Vite, Tailwind CSS |
-| Voice | ElevenLabs (coach clips and the Yash companion), Sarvam (Ishu reminder call) |
+| Voice | ElevenLabs (coach clips and the Rehabit AI companion), Sarvam (Rehab AI reminder call) |
 
 ## Getting started
 
@@ -123,14 +119,19 @@ Open <http://localhost:5173> to play and <http://localhost:5173/dashboard> for t
 
 ```
 rehabit/
-├── firmware/    ESP32 firmware (PlatformIO)
-├── backend/     FastAPI app: device and game sockets, REST API, scheduler
-├── frontend/    React app
+├── firmware/            ESP32 firmware (PlatformIO)
+│   ├── src/             Touch pads, Wi-Fi and the WebSocket link
+│   └── include/         Pin and timing config, secrets template
+├── backend/             FastAPI app: device and game sockets, REST API,
+│                        scheduler, voice agent and WhatsApp hooks
+├── frontend/            React app (Vite)
+│   ├── public/          Logo, favicon and voice coach clips
 │   └── src/
-│       ├── patient/     Play page: games, talk, mood
+│       ├── patient/     Play page: games, Ankur, talk, mood
 │       ├── therapist/   Dashboard
 │       └── shared/      Device socket, API calls, shared UI
-└── design/      Mockups, hand drawing, mascot and logo sources
+├── assets/logo/         Full-size logo and the script that makes the web copies
+└── .env.example         Settings and keys template
 ```
 
 ## Note
