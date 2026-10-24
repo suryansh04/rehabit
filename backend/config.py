@@ -12,11 +12,13 @@ class Settings(BaseSettings):
     sarvam_api_key: str = ""
     sarvam_org_id: str = ""
     sarvam_workspace_id: str = ""
-    sarvam_companion_app_id: str = ""
     sarvam_reminder_app_id: str = ""
     sarvam_reminder_app_version: int = 1
     sarvam_connection_id: str = ""
     sarvam_agent_phone_number: str = ""
+
+    elevenlabs_api_key: str = ""
+    elevenlabs_agent_id: str = ""
 
     omnidim_api_key: str = ""
     meta_wa_token: str = ""
