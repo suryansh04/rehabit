@@ -3,9 +3,9 @@ import { Pill, TopBar } from '../shared/TopBar'
 import { saveMood } from '../shared/api'
 import { FINGER_PADS } from '../shared/config'
 import { useDeviceEvents } from '../shared/device'
+import { MOOD_LABELS } from '../shared/stats'
 import { Ankur } from './ankur/Ankur'
 
-const MOODS = ['Very low', 'Low', 'Okay', 'Good', 'Very good']
 const LOW_MOOD_MAX = 2
 const THANKS_MS = 1500
 
@@ -39,7 +39,7 @@ export function MoodScreen({ onDone }: { onDone: () => void }) {
           <h1 className="text-[34px] font-bold tracking-tight">{picked ? 'Thank you for telling us.' : 'How do you feel now?'}</h1>
           <p className="text-muted">Tap one fingertip coin. 1 is very low, 5 is very good.</p>
           <div className="mt-6 flex w-full flex-col gap-2.5">
-            {MOODS.map((label, i) => {
+            {MOOD_LABELS.map((label, i) => {
               const score = i + 1
               const on = picked === score
               return (

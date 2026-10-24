@@ -74,4 +74,6 @@ def public_config():
         "patient_name": settings.patient_name,
         "session_time": settings.session_time,
         "reminder_minutes_before": settings.reminder_minutes_before,
+        "missed_after_minutes": settings.missed_after_minutes,
+        "daily_summary_time": settings.daily_summary_time,
     }

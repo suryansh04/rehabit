@@ -30,4 +30,6 @@ export type PublicConfig = {
   patient_name: string
   session_time: string
   reminder_minutes_before: number
+  missed_after_minutes: number
+  daily_summary_time: string
 }

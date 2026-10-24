@@ -7,7 +7,7 @@ import { Ankur } from './ankur/Ankur'
 import { SpeechClock } from './speechClock'
 import { VoiceBars } from './VoiceBars'
 
-const COMPANION = 'Yash'
+const COMPANION = 'Rehabit AI'
 // with no timing data from ElevenLabs, show the whole line after this long
 const NO_TIMING_MS = 2500
 // voice tags like [happy] steer the voice; the patient should not read them
@@ -16,8 +16,8 @@ const BUBBLE = 'msg-in max-w-[80%] rounded-[24px] px-6 py-4 text-lg leading-rela
 
 type Line = { id: number; from: 'user' | 'bot'; text: string }
 
-// Shows each word of Yash's newest line the moment he says it. Older lines show in full.
-function YashLine({ text, active, clock }: { text: string; active: boolean; clock: SpeechClock }) {
+// Shows each word of Rehabit AI's newest line the moment he says it. Older lines show in full.
+function AssistantLine({ text, active, clock }: { text: string; active: boolean; clock: SpeechClock }) {
   const words = text.replace(VOICE_TAG, '').trim().split(' ')
   const [count, setCount] = useState(0)
 
@@ -50,7 +50,7 @@ function YashLine({ text, active, clock }: { text: string; active: boolean; cloc
   )
 }
 
-// Keeps the newest message in view, also while Yash's line is still growing.
+// Keeps the newest message in view, also while Rehabit AI's line is still growing.
 function useStickToBottom() {
   const scroller = useRef<HTMLDivElement>(null)
   const content = useRef<HTMLDivElement>(null)
@@ -89,13 +89,13 @@ function Talk({ onEnd }: { onEnd: () => void }) {
 
   const conversation = useConversation({
     onMessage: ({ role, message }: MessagePayload) => {
-      // Yash's text arrives just before his audio, so a new line starts a fresh timeline
+      // Rehabit AI's text arrives just before his audio, so a new line starts a fresh timeline
       if (role !== 'user') clock.reset()
       setLines((all) => [...all, { id: all.length, from: role === 'user' ? 'user' : 'bot', text: message }])
     },
     onAudioAlignment: (alignment) => clock.add(alignment),
     onError: (message) => setError(message),
-    // Yash hangs up himself (End call tool or the 3 minute cap). Our own endSession is reason "user".
+    // Rehabit AI hangs up himself (End call tool or the 3 minute cap). Our own endSession is reason "user".
     onDisconnect: (details) => {
       if (details.reason === 'agent') finish()
       if (details.reason === 'error') setError(details.message)
@@ -154,7 +154,7 @@ function Talk({ onEnd }: { onEnd: () => void }) {
             )}
             {lines.map((line) =>
               line.from === 'bot' ? (
-                <YashLine key={line.id} text={line.text} active={line.id === lastBot} clock={clock} />
+                <AssistantLine key={line.id} text={line.text} active={line.id === lastBot} clock={clock} />
               ) : (
                 <p key={line.id} className={`${BUBBLE} self-end rounded-br-md bg-lilac text-accent-ink`}>
                   {line.text}
@@ -163,7 +163,7 @@ function Talk({ onEnd }: { onEnd: () => void }) {
             )}
           </div>
         </div>
-        {/* Yash is the voice; Ankur only listens along */}
+        {/* Rehabit AI is the voice; Ankur only listens along */}
         <footer className="flex items-center gap-5 rounded-card bg-surface px-6 py-4 shadow-soft">
           <Ankur state="listen" size={64} />
           <div className="min-w-0 flex-1">

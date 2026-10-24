@@ -36,11 +36,11 @@ An AI phone call reminds the patient just before each daily session.
    | A miss | "Koi baat nahi, agla try karo." |
    | Last 5 taps | "Almost done! Aap toh superstar ho!" |
    | Game end | "Wohoo! Session done! Kal phir milte hain!" |
-3. **AI companion (Yash)**: Yash is a warm male voice (ElevenLabs voice "Viraj") who talks with the patient in Hindi about feelings. Yash is not Ankur: Ankur is the mascot who speaks the coach lines. The patient holds the palm pad for 2 seconds to start a talk. A talk is 3 minutes at most (free plan: 15 agent minutes a month). After the talk, the screen asks "How do you feel?". The patient taps pad 1 (bad) to 5 (good). We save this as the mood score.
-4. **Reminder call (Ishu)**: Ishu is a cheerful male Sarvam voice ("Shubh"), a different character from Yash. A few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up. The backend sends `patient_name` and `session_time` as agent variables, so the agent can say them.
+3. **AI companion (Rehabit AI)**: Rehabit AI is a warm male voice (ElevenLabs voice "Viraj") who talks with the patient in Hindi about feelings. Rehabit AI is not Ankur: Ankur is the mascot who speaks the coach lines. The patient holds the palm pad for 2 seconds to start a talk. A talk is 3 minutes at most (free plan: 15 agent minutes a month). After the talk, the screen asks "How do you feel?". The patient taps pad 1 (bad) to 5 (good). We save this as the mood score.
+4. **Reminder call (Rehab AI)**: Rehab AI is a cheerful male Sarvam voice ("Shubh"). It is the phone side of Rehabit; the browser companion is Rehabit AI. A few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up. The backend sends `patient_name` and `session_time` as agent variables, so the agent can say them.
 5. **WhatsApp**: daily summary and alerts to family. Alerts: missed session (no game within 1 hour after session time) and low mood.
 6. **Therapist dashboard**: progress per mode, mood vs reaction time, session history.
-7. **Ankur, the mascot**: a small sprout in a clay pot. He speaks the coach lines in a round cloud thought bubble (thinking dots first, then the line). He reacts to game events: watching while a coin glows, happy on a good tap, cheer on a streak, encourage on a miss (never sad), push on the last 5 taps, celebrate (a flower blooms) when a game ends, comfort on a low mood. On the menu he sits at the bottom right as the talk button: his cloud says to hold coin 6 or tap him, and a tap or a palm hold starts the talk with Yash. Patient screens only, not the dashboard. Design: `design/round-05-mascot/`.
+7. **Ankur, the mascot**: a small sprout in a clay pot. He speaks the coach lines in a round cloud thought bubble (thinking dots first, then the line). He reacts to game events: watching while a coin glows, happy on a good tap, cheer on a streak, encourage on a miss (never sad), push on the last 5 taps, celebrate (a flower blooms) when a game ends, comfort on a low mood. On the menu he sits at the bottom right as the talk button: his cloud says to hold coin 6 or tap him, and a tap or a palm hold starts the talk with Rehabit AI. Patient screens only, not the dashboard. Design: `design/round-05-mascot/` (local only, not in git).
 
 ## Hardware
 
@@ -159,11 +159,11 @@ DAILY_SUMMARY_TIME=21:00
 DEVICE_TOKEN=
 ```
 
-We use two voice agents, each with its own prompt. The companion (Yash) is an ElevenLabs agent in the browser. The reminder call (Ishu) is a Sarvam agent on the phone. The Sarvam key is the workspace key from indus.sarvam.ai (starts with `sk_samvaad_`), not the general Sarvam API key.
+We use two voice agents, each with its own prompt. The companion (Rehabit AI) is an ElevenLabs agent in the browser. The reminder call (Rehab AI) is a Sarvam agent on the phone. The Sarvam key is the workspace key from indus.sarvam.ai (starts with `sk_samvaad_`), not the general Sarvam API key.
 
 The reminder call needs a phone number and a telephony connection in the Sarvam workspace. The browser companion does not need them.
 
-The ElevenLabs agent has authentication on, a 180 second max duration and the End call tool. To ignore room noise it uses background voice detection, Hindi and English ignore terms (short sounds like "haan" do not interrupt Yash), and no interruptions of the first message.
+The ElevenLabs agent has authentication on, a 180 second max duration and the End call tool. To ignore room noise it uses background voice detection, Hindi and English ignore terms (short sounds like "haan" do not interrupt Rehabit AI), and no interruptions of the first message.
 
 ## Rules for Claude
 

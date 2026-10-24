@@ -28,6 +28,17 @@ body {
   font-weight: 500;
 }
 
+/* Tailwind v4 gives buttons the plain arrow; a hand shows what can be clicked. */
+button:not(:disabled),
+[role='button'],
+a[href] {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: not-allowed;
+}
+
 .num {
   font-variant-numeric: tabular-nums;
 }

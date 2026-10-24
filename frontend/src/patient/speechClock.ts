@@ -3,7 +3,7 @@ import type { AudioAlignmentEvent } from '@elevenlabs/react'
 // The audio track plays a little after its timing data arrives.
 const PLAYBACK_DELAY_MS = 150
 
-// ElevenLabs sends the start time of every character Yash says, one audio chunk at a time.
+// ElevenLabs sends the start time of every character Rehabit AI says, one audio chunk at a time.
 // Chunks play back to back, so we lay them on one timeline and can ask how much he has said.
 export class SpeechClock {
   private starts: number[] = []
