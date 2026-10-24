@@ -66,6 +66,7 @@ If time is short, cut from the bottom.
 
 ### Frontend notes
 
+- The Vite dev server proxies `/api` and `/ws` to the backend on port 8000. The browser only talks to port 5173, so one ngrok tunnel to 5173 covers the page, the API and the socket.
 - Charts are small SVG components (sparkline, bars, scatter). No chart library.
 - Font: Plus Jakarta Sans (`@fontsource`). Icons: `lucide-react`. Design: `design/NOTES.md` and `design/round-04-play/`.
 - Keys 1 to 6 on the keyboard act as pads, and holding 6 for 2 seconds acts as a palm hold. This works without the board.

@@ -12,7 +12,9 @@ async def broadcast(message: str) -> None:
     for client in list(game_clients):
         try:
             await client.send_text(message)
-        except (WebSocketDisconnect, RuntimeError):
+        except Exception as error:
+            # a closed browser tab must not stop taps reaching the others
+            print(f"[ws] dropping game client: {error!r}")
             game_clients.discard(client)
 
 

@@ -1,5 +1,6 @@
-export const API_URL = import.meta.env.VITE_API_URL ?? 'http://localhost:8000'
-export const WS_URL = API_URL.replace(/^http/, 'ws') + '/ws/game'
+// The Vite proxy forwards /api and /ws to the backend, so paths stay relative.
+export const API_URL = ''
+export const WS_URL = `${location.protocol === 'https:' ? 'wss' : 'ws'}://${location.host}/ws/game`
 
 export const PALM_PAD = 6
 export const FINGER_PADS = [1, 2, 3, 4, 5]
