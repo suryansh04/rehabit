@@ -1,8 +1,6 @@
-import { useEffect, useState } from 'react'
 import { Ankur, type AnkurState } from './Ankur'
 
 const PUFFS = 10
-const THINK_MS = 600
 
 const puffs = Array.from({ length: PUFFS }, (_, i) => {
   const a = (2 * Math.PI * i) / PUFFS
@@ -10,28 +8,23 @@ const puffs = Array.from({ length: PUFFS }, (_, i) => {
   return { left: `${50 + 47 * Math.cos(a)}%`, top: `${50 + 44 * Math.sin(a)}%`, width: size, height: size }
 })
 
-// Ankur thinks for a moment, then the line appears. Give it a new key to replay.
-export function ThoughtCloud({ text }: { text: string }) {
-  const [thinking, setThinking] = useState(true)
-
-  useEffect(() => {
-    const timer = window.setTimeout(() => setThinking(false), THINK_MS)
-    return () => window.clearTimeout(timer)
-  }, [])
-
+// text null shows thinking dots. A new lineKey replays the pop-in for the next line.
+export function ThoughtCloud({ text, lineKey }: { text: string | null; lineKey?: string | number }) {
   return (
     <div className="ank-cloud" role="status">
       {puffs.map((style, i) => (
         <span key={i} className="ank-puff" style={style} />
       ))}
-      {thinking ? (
+      {text === null ? (
         <span className="ank-dots" aria-label="Ankur is thinking">
           <i />
           <i />
           <i />
         </span>
       ) : (
-        <span className="ank-line">{text}</span>
+        <span key={lineKey ?? text} className="ank-line">
+          {text}
+        </span>
       )}
       <span className="ank-trail ank-trail-1" />
       <span className="ank-trail ank-trail-2" />
@@ -39,16 +32,16 @@ export function ThoughtCloud({ text }: { text: string }) {
   )
 }
 
-type SaysProps = { state: AnkurState; size: number; text: string | null; sayKey?: string | number }
+// text undefined hides the cloud, null shows thinking dots, a string shows the line.
+type SaysProps = { state: AnkurState; size: number; text?: string | null; lineKey?: string | number }
 
-// Ankur with his cloud. A new sayKey replays the thinking dots for the same text.
-export function AnkurSays({ state, size, text, sayKey }: SaysProps) {
+export function AnkurSays({ state, size, text, lineKey }: SaysProps) {
   return (
     <div className="flex items-start">
       <Ankur state={state} size={size} />
-      {text && (
+      {text !== undefined && (
         <div className="-mt-5 ml-2">
-          <ThoughtCloud key={sayKey ?? text} text={text} />
+          <ThoughtCloud text={text} lineKey={lineKey} />
         </div>
       )}
     </div>

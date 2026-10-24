@@ -32,11 +32,11 @@ An AI phone call reminds the patient just before each daily session.
    | When | Clip |
    | --- | --- |
    | Game start | "Chaliye shuru karte hain!" |
-   | 5 correct taps in a row | "Bahut badhiya! Aise hi karte raho." |
+   | 5 correct taps in a row | "Bohot badhiya!" |
    | A miss | "Koi baat nahi, agla try karo." |
-   | Last 5 taps | "Bas 5 aur! Aap kar sakte ho." |
-   | Game end | "Shabash! Aaj ka session poora hua." |
-3. **AI companion**: patient holds the palm pad for 2 seconds to start a talk. After the talk, the screen asks "How do you feel?". The patient taps pad 1 (bad) to 5 (good). We save this as the mood score.
+   | Last 5 taps | "Almost done! Aap toh superstar ho!" |
+   | Game end | "Wohoo! Session done! Kal phir milte hain!" |
+3. **AI companion (Mitra)**: Mitra means "friend". He is a warm male voice (ElevenLabs voice "Viraj") who talks with the patient in Hindi about feelings. Mitra is not Ankur: Ankur is the mascot who speaks the coach lines. The patient holds the palm pad for 2 seconds to start a talk. A talk is 3 minutes at most (free plan: 15 agent minutes a month). After the talk, the screen asks "How do you feel?". The patient taps pad 1 (bad) to 5 (good). We save this as the mood score.
 4. **Reminder call**: a few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up.
 5. **WhatsApp**: daily summary and alerts to family. Alerts: missed session (no game within 1 hour after session time) and low mood.
 6. **Therapist dashboard**: progress per mode, mood vs reaction time, session history.
@@ -72,7 +72,7 @@ An AI phone call reminds the patient just before each daily session.
 | Backend | FastAPI (Python) |
 | Frontend | React, TypeScript, Tailwind, Vite |
 | Voice coach | ElevenLabs clips, made once on the website |
-| AI companion | Sarvam Voice Agents (web SDK in the browser) |
+| AI companion | ElevenLabs Agents (`@elevenlabs/react` in the browser) |
 | Reminder call | Sarvam Voice Agents (Instant Outbound API) |
 | WhatsApp | OmniDimension or Meta WhatsApp Cloud API (not final). Use one `send_whatsapp()` function. |
 | Tunnel | ngrok or Cloudflare Tunnel |
@@ -139,11 +139,12 @@ Keep all keys in `.env`. Do not commit `.env`.
 SARVAM_API_KEY=
 SARVAM_ORG_ID=
 SARVAM_WORKSPACE_ID=
-SARVAM_COMPANION_APP_ID=
 SARVAM_REMINDER_APP_ID=
 SARVAM_REMINDER_APP_VERSION=1
 SARVAM_CONNECTION_ID=
 SARVAM_AGENT_PHONE_NUMBER=
+ELEVENLABS_API_KEY=
+ELEVENLABS_AGENT_ID=
 OMNIDIM_API_KEY=
 META_WA_TOKEN=
 META_WA_PHONE_NUMBER_ID=
@@ -157,9 +158,11 @@ DAILY_SUMMARY_TIME=21:00
 DEVICE_TOKEN=
 ```
 
-We use two Sarvam agents. The companion agent talks about feelings in the browser. The reminder agent makes the phone call. Each agent has its own prompt.
+We use two voice agents, each with its own prompt. The companion (Mitra) is an ElevenLabs agent in the browser. The reminder call is a Sarvam agent on the phone.
 
 The reminder call needs a phone number and a telephony connection in the Sarvam workspace. The browser companion does not need them.
+
+The ElevenLabs agent has authentication on, a 180 second max duration and the End call tool.
 
 ## Rules for Claude
 
@@ -169,10 +172,10 @@ The reminder call needs a phone number and a telephony connection in the Sarvam 
 - Do not use em-dashes in user-facing text.
 - Use "we" in product text.
 - Verify API details in official docs before you use them.
-- Never put `SARVAM_API_KEY` in frontend code. The browser SDK calls a backend proxy (`baseUrl`). The backend adds the key.
+- Never put `ELEVENLABS_API_KEY` or `SARVAM_API_KEY` in frontend code. The browser asks our backend for a short-lived conversation token. The backend adds the key.
 - A palm hold is not a browser click. The patient must click "Start session" once on the page first. This unlocks audio and the microphone. Then a palm hold can start the companion. Microphone needs HTTPS or localhost.
 - A palm hold starts the companion only on the menu screen. During a game, pad 6 is a normal pad and a hold does nothing.
-- The companion proxy is one GET route. The SDK calls `{baseUrl}orgs/{org}/workspaces/{ws}/apps/{app}/url` to get a signed WebSocket URL. The audio then goes straight from the browser to Sarvam, not through our backend.
+- The companion token is one GET route, `/api/companion/token`. It calls `GET https://api.elevenlabs.io/v1/convai/conversation/token?agent_id=...` with the `xi-api-key` header and returns the token. The browser starts the talk with it. The audio then goes straight from the browser to ElevenLabs (WebRTC), not through our backend.
 
 ## Code style
 
