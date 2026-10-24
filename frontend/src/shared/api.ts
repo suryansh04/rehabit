@@ -7,8 +7,19 @@ async function request<T>(path: string, body?: unknown): Promise<T> {
     headers: body === undefined ? undefined : { 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   })
-  if (!res.ok) throw new Error(`${path} failed: ${res.status} ${await res.text()}`)
+  if (!res.ok) throw new Error(await errorText(res))
   return res.json()
+}
+
+// FastAPI puts the reason in "detail"; show that instead of raw JSON.
+async function errorText(res: Response) {
+  const text = await res.text()
+  try {
+    const { detail } = JSON.parse(text)
+    return typeof detail === 'string' ? detail : JSON.stringify(detail)
+  } catch {
+    return text || `${res.status} ${res.statusText}`
+  }
 }
 
 export const getConfig = () => request<PublicConfig>('/api/config')

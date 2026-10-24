@@ -1,4 +1,24 @@
-import type { Session } from './types'
+import type { ModeId, Session } from './types'
+
+const SCORE_UNITS: Record<ModeId, string> = { classic: '%', finger: '%', memory: 'pads', endurance: 'taps' }
+
+export function scoreUnit(mode: ModeId) {
+  return SCORE_UNITS[mode]
+}
+
+// "Today, 6:04 PM", "Yesterday, 6:11 PM" or "Mon, 6:02 PM"
+export function whenText(iso: string, now = new Date()) {
+  const at = new Date(iso)
+  const time = at.toLocaleTimeString('en-IN', { hour: 'numeric', minute: '2-digit' })
+  const day = dayKey(at)
+  if (day === dayKey(now)) return `Today, ${time}`
+  if (day === dayKey(new Date(now.getTime() - DAY_MS))) return `Yesterday, ${time}`
+  return `${at.toLocaleDateString('en-IN', { weekday: 'short' })}, ${time}`
+}
+
+export function lastDays(count: number, today = new Date()) {
+  return Array.from({ length: count }, (_, i) => new Date(today.getTime() - (count - 1 - i) * DAY_MS))
+}
 
 const DAY_MS = 24 * 60 * 60 * 1000
 
