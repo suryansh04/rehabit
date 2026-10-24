@@ -34,8 +34,8 @@ An AI phone call reminds the patient just before each daily session.
    | Game start | "Chaliye shuru karte hain!" |
    | 5 correct taps in a row | "Bohot badhiya!" |
    | A miss | "Koi baat nahi, agla try karo." |
-   | Last 5 taps | "Bas 5 aur! Aap kar sakte ho." |
-   | Game end | "Shabash! Aaj ka session poora hua." |
+   | Last 5 taps | "Almost done! Aap toh superstar ho!" |
+   | Game end | "Wohoo! Session done! Kal phir milte hain!" |
 3. **AI companion**: patient holds the palm pad for 2 seconds to start a talk. After the talk, the screen asks "How do you feel?". The patient taps pad 1 (bad) to 5 (good). We save this as the mood score.
 4. **Reminder call**: a few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up.
 5. **WhatsApp**: daily summary and alerts to family. Alerts: missed session (no game within 1 hour after session time) and low mood.

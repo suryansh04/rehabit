@@ -3,8 +3,8 @@ export const COACH_LINES = {
   start: 'Chaliye shuru karte hain!',
   streak: 'Bohot badhiya!',
   miss: 'Koi baat nahi, agla try karo.',
-  last5: 'Bas 5 aur! Aap kar sakte ho.',
-  end: 'Shabash! Aaj ka session poora hua.',
+  last5: 'Almost done! Aap toh superstar ho!',
+  end: 'Wohoo! Session done! Kal phir milte hain!',
 } as const
 
 export type ClipId = keyof typeof COACH_LINES
