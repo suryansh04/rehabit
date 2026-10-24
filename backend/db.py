@@ -112,9 +112,10 @@ def seed_demo() -> None:
             return
     modes = ["classic", "finger", "memory", "endurance"]
     moods = [2, 3, 3, 3, 4, 4, 4]
-    today = datetime.now().replace(hour=18, minute=4, second=0, microsecond=0)
+    # the 7 days before today, so today stays empty for the live demo
+    evening = datetime.now().replace(hour=18, minute=4, second=0, microsecond=0)
     for i in range(7):
-        start = today - timedelta(days=6 - i)
+        start = evening - timedelta(days=7 - i)
         for j in range(2 + i % 2):
             add_session(_demo_session(modes[(i + j) % 4], i, start + timedelta(minutes=6 * j)))
         with connect() as conn:
