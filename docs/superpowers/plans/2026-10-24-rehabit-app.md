@@ -33,7 +33,6 @@ backend/
   scheduler.py     One-minute loop: reminder, missed, daily summary
   main.py          App, CORS, routers, scheduler start
   fake_device.py   Dev tool: type 1-6 / hold / auto
-  make_clips.py    One-time voice clip generation
 frontend/src/
   main.tsx                     Router: / and /dashboard
   index.css                    Tailwind import + theme tokens + font
@@ -116,11 +115,11 @@ frontend/src/
 
 ### Task 6: Voice coach
 
-**Files:** `backend/make_clips.py`, `patient/useCoach.ts`
+**Files:** `patient/useCoach.ts`, clips in `frontend/public/clips/`
 
-- [ ] `make_clips.py`: for the 5 clips in CLAUDE.md, `POST https://api.sarvam.ai/text-to-speech` with header `api-subscription-key`, body `{text, language_code: "hi-IN", model: "bulbul:v3", speaker: "priya"}`. Decode `audios[0]` (base64 WAV) to `frontend/public/clips/{start,streak,miss,last5,end}.wav`.
+- [ ] Make the 5 clips in CLAUDE.md on the ElevenLabs website and save them as `frontend/public/clips/{start,streak,miss,last5,end}.mp3`. (Changed from Sarvam TTS: the Sarvam voices sounded too mature.)
 - [ ] `useCoach(events)` plays a clip on start, on every 5th streak, on a miss (at most once per 4 s), when 5 are left, and at the end. The coach bubble text matches the clip.
-- [ ] **Verify:** run the script, play Classic, and hear the clips.
+- [ ] **Verify:** play Classic and hear the clips.
 - [ ] Commit `Voice coach clips`.
 
 ### Task 7: Companion and mood
