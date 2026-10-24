@@ -1,3 +1,4 @@
+import math
 import sys
 from pathlib import Path
 
@@ -10,6 +11,7 @@ G = {"body": "#8BD47E", "shade": "#6DBE63", "hi": "#B8EBAA", "leaf": "#5FB257", 
      "pot": "#D9774B", "rim": "#E58C5F", "potdark": "#B85E36", "soil": "#6B4A3A", "ink": "#1B1530",
      "cheek": "#FF9F8A", "petal": "#FFB3C7", "center": "#FFD45C", "gold": "#FFC93C"}
 
+PUFFS = 10
 LEAF = "M0,0 Q13,-11 28,-2 Q14,9 0,0 Z"
 
 EYES = {
@@ -158,18 +160,14 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 .mock main{display:grid;grid-template-columns:1fr 520px 1fr;align-items:center;gap:20px;padding:0 32px 32px}
 .mock .left{display:flex;flex-direction:column;gap:6px}
 .mock .speech{display:flex;align-items:flex-start;margin-top:34px}
-.think{position:relative;isolation:isolate;margin:-20px 0 0 4px;background:var(--sf);border-radius:40px;padding:16px 24px;
-  filter:drop-shadow(0 10px 16px rgba(27,21,48,.10));font-weight:700;font-size:16px;max-width:230px;display:grid;
-  transform-origin:0% 100%;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
-/* puffs around the edge turn the rounded box into a cloud */
-.think .puff{position:absolute;z-index:-1;background:var(--sf);border-radius:50%}
-.puff.p1{width:54px;height:54px;top:-22px;left:6%} .puff.p2{width:66px;height:66px;top:-30px;left:34%}
-.puff.p3{width:50px;height:50px;top:-18px;right:6%} .puff.p4{width:46px;height:46px;bottom:-16px;left:22%}
-.puff.p5{width:52px;height:52px;bottom:-20px;right:18%} .puff.p6{width:42px;height:42px;left:-16px;top:22%}
-.puff.p7{width:42px;height:42px;right:-16px;top:26%}
-.think>.dots,.think>.line{grid-area:1/1;align-self:center}
+.think{position:relative;isolation:isolate;margin:-34px 0 0 10px;background:var(--sf);border-radius:50%;padding:30px 30px;
+  filter:drop-shadow(0 10px 16px rgba(27,21,48,.10));font-weight:700;font-size:16px;width:200px;min-height:120px;display:grid;
+  place-items:center;text-align:center;transform-origin:0% 100%;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+/* puffs sit evenly on the oval's edge, which turns it into a round cloud */
+.think .puff{position:absolute;z-index:-1;background:var(--sf);border-radius:50%;translate:-50% -50%}
+.think>.dots,.think>.line{grid-area:1/1}
 .think em{position:absolute;background:var(--sf);border-radius:50%}
-.think .t1{width:18px;height:18px;left:-6px;bottom:-26px} .think .t2{width:10px;height:10px;left:-20px;bottom:-40px}
+.think .t1{width:18px;height:18px;left:-2px;bottom:-14px} .think .t2{width:10px;height:10px;left:-18px;bottom:-30px}
 .dots{display:flex;gap:5px;padding:4px 0} .dots i{width:8px;height:8px;border-radius:50%;background:var(--mu);opacity:.5;animation:dot 1s ease-in-out infinite}
 .dots i:nth-child(2){animation-delay:.15s} .dots i:nth-child(3){animation-delay:.3s}
 .loop .dots{animation:dots-vis 4s infinite} .loop .line{animation:line-vis 4s infinite}
@@ -192,7 +190,10 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 def thought(line, loop=True):
     """Thought bubble: thinking dots first, then the coach line pops in."""
     dots = "<span class='dots'><i></i><i></i><i></i></span>"
-    puffs = "".join(f"<span class='puff p{i}'></span>" for i in range(1, 8))
+    puffs = "".join(
+        f"<span class='puff' style='left:{50 + 47 * math.cos(a):.1f}%;top:{50 + 44 * math.sin(a):.1f}%;"
+        f"width:{size}px;height:{size}px'></span>"
+        for a, size in ((2 * math.pi * i / PUFFS, 52 if i % 2 else 62) for i in range(PUFFS)))
     return (f"<div class='think{' loop' if loop else ''}'>{puffs}{dots}<span class='line'>{line}</span>"
             "<em class='t1'></em><em class='t2'></em></div>")
 
