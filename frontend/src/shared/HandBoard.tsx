@@ -1,51 +1,71 @@
-import { useId } from 'react'
 import { PALM_PAD } from './config'
 import type { Hand } from './types'
 
-// Geometry comes from design/hand/hand.py: a right hand seen from above, palm down, thumb on the left.
-// Each finger: base x, base y, angle (0 = up), length, base width, tip width.
-const FINGERS = [
-  [154, 350, -56, 108, 54, 44],
-  [178, 222, -9, 140, 45, 38],
-  [220, 212, -1, 158, 47, 39],
-  [260, 222, 7, 144, 44, 37],
-  [294, 252, 17, 108, 38, 32],
+// A right hand seen from above, palm down, so the thumb is on the left.
+// Drawn as one outline: capsule fingers, round U-shaped gaps, a round palm.
+// Each digit: base center x, y, angle (0 = straight up), length, width.
+const DIGITS = [
+  [78, 250, -58, 70, 50],
+  [110, 150, -14, 92, 42],
+  [158, 138, -2, 108, 44],
+  [206, 146, 9, 98, 42],
+  [248, 172, 22, 74, 38],
 ] as const
-const PALM =
-  'M182,488 Q162,488 157,470 C148,440 138,420 136,390 C132,352 138,320 152,288 C158,262 160,240 172,224 ' +
-  'Q184,210 204,210 L270,214 Q304,220 308,256 C309,290 306,320 304,352 C301,400 294,440 287,468 Q282,488 262,488 Z'
-const PALM_COIN = [224, 340] as const
-const COIN_AT = 0.8
-const FINGER_COIN_R = 15
-const PALM_COIN_R = 30
-const VIEW = { x: 20, y: 30, w: 350, h: 470 }
+const VALLEY_DEPTH = 12
+const PALM_BOTTOM = '276,290 256,320 C236,350 150,356 118,334'
+const PALM_COIN = [168, 262] as const
+const COIN_AT = 0.78
+const FINGER_COIN_R = 14
+const PALM_COIN_R = 28
+const VIEW = { x: -12, y: -4, w: 310, h: 364 }
 const MIRROR_X = 2 * VIEW.x + VIEW.w
-// Blur then sharpen the alpha: the fingers melt into the palm with round curves instead of sharp corners.
-const SMOOTH_BLUR = 5
-const SMOOTH_ALPHA = '1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10'
 
-type Finger = (typeof FINGERS)[number]
+type Digit = (typeof DIGITS)[number]
+type Point = [number, number]
 
-function point([bx, by, angle, length, wb, wt]: Finger, t: number, side = 0) {
+const fmt = ([x, y]: Point) => `${x.toFixed(1)},${y.toFixed(1)}`
+
+// side -1 is the digit's left edge, +1 its right edge, 0 its middle line
+function along([bx, by, angle, length, width]: Digit, t: number, side = 0): Point {
   const a = (angle * Math.PI) / 180
-  const width = wb + (wt - wb) * t
   return [
     bx + Math.sin(a) * length * t + Math.cos(a) * side * (width / 2),
     by - Math.cos(a) * length * t + Math.sin(a) * side * (width / 2),
   ]
 }
 
-function fingerPath(f: Finger) {
-  const [x1, y1] = point(f, -0.15, -1)
-  const [x2, y2] = point(f, 1, -1)
-  const [x3, y3] = point(f, 1, 1)
-  const [x4, y4] = point(f, -0.15, 1)
-  const r = f[5] / 2
-  return `M${x1},${y1} L${x2},${y2} A${r},${r} 0 0 1 ${x3},${y3} L${x4},${y4} Z`
+function digitEdge(d: Digit) {
+  const r = d[4] / 2
+  return `L${fmt(along(d, 1, -1))} A${r},${r} 0 0 1 ${fmt(along(d, 1, 1))} L${fmt(along(d, 0, 1))}`
 }
 
-const SHAPES = [PALM, ...FINGERS.map(fingerPath)]
-const COINS = [...FINGERS.map((f) => point(f, COIN_AT)), PALM_COIN]
+const below = ([x, y]: Point, dy: number): Point => [x, y + dy]
+
+// Every join leaves and enters along the digit's own direction, so there are no corners.
+function outline() {
+  const [thumb, ...fingers] = DIGITS
+  const index = fingers[0]
+  const little = fingers[fingers.length - 1]
+  let path = `M118,334 C100,326 ${fmt(along(thumb, -0.45, -1))} ${fmt(along(thumb, 0, -1))} ${digitEdge(thumb)}`
+
+  // the soft web between thumb and index dips into the palm
+  path += ` C${fmt(along(thumb, -0.2, 1))} ${fmt(along(index, -0.9, -1))} ${fmt(along(index, 0, -1))}`
+
+  fingers.forEach((finger, i) => {
+    path += ` ${digitEdge(finger)}`
+    const next = fingers[i + 1]
+    if (!next) return
+    const from = along(finger, 0, 1)
+    const to = along(next, 0, -1)
+    path += ` C${fmt(below(from, VALLEY_DEPTH))} ${fmt(below(to, VALLEY_DEPTH))} ${fmt(to)}`
+  })
+  return `${path} C${fmt(along(little, -0.7, 1))} ${PALM_BOTTOM} Z`
+}
+
+const OUTLINE = outline()
+const COINS = [...DIGITS.slice(1).map((d) => along(d, COIN_AT)), PALM_COIN]
+// the thumb coin sits a little further out on the shorter thumb
+COINS.unshift(along(DIGITS[0], 0.72))
 
 export type Flash = { pad: number; kind: 'hit' | 'miss' }
 
@@ -64,31 +84,23 @@ function coinFill(pad: number, live: Props['live'], flash: Props['flash']) {
 
 export function HandBoard({ hand, size, live = null, flash = null, dimPalm = false }: Props) {
   const mirror = hand === 'left' ? `translate(${MIRROR_X} 0) scale(-1 1)` : undefined
-  const shapes = SHAPES.map((d) => <path key={d} d={d} />)
-  // useId has colons, which break url(#...) references
-  const smooth = `hand-smooth-${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
   return (
     <svg
       viewBox={`${VIEW.x} ${VIEW.y} ${VIEW.w} ${VIEW.h}`}
       width={size}
+      overflow="visible"
       role="img"
       aria-label={`${hand} hand board${live ? `, coin ${live} glowing` : ''}`}
     >
-      <defs>
-        <filter id={smooth} x="-10%" y="-10%" width="120%" height="120%">
-          <feGaussianBlur stdDeviation={SMOOTH_BLUR} />
-          <feColorMatrix type="matrix" values={SMOOTH_ALPHA} />
-        </filter>
-      </defs>
-      <g transform={mirror}>
-        <g filter={`url(#${smooth})`} fill="var(--color-hand-line)" stroke="var(--color-hand-line)" strokeWidth={8} strokeLinejoin="round">
-          {shapes}
-        </g>
-        <g filter={`url(#${smooth})`} fill="var(--color-hand)">
-          {shapes}
-        </g>
-      </g>
+      <path
+        d={OUTLINE}
+        transform={mirror}
+        fill="var(--color-hand)"
+        stroke="var(--color-hand-line)"
+        strokeWidth={4}
+        strokeLinejoin="round"
+      />
       {COINS.map(([x, y], i) => {
         const pad = i + 1
         const cx = hand === 'left' ? MIRROR_X - x : x
