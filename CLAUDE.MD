@@ -143,6 +143,7 @@ OMNIDIM_API_KEY=
 META_WA_TOKEN=
 META_WA_PHONE_NUMBER_ID=
 FAMILY_PHONE=
+PATIENT_NAME=Ramesh Kumar
 PATIENT_PHONE=
 SESSION_TIME=18:00
 REMINDER_MINUTES_BEFORE=10
@@ -177,7 +178,7 @@ The reminder call needs a phone number and a telephony connection in the Sarvam 
 - Comments are short, plain and human. Write one only when the code is not obvious. Explain why, not what.
 - Small functions that do one thing. Clear names, so the code reads without comments.
 - No dead code, no commented-out code, no unused imports or variables.
-- No magic numbers. Put values like the 150 ms debounce or the 2 missed sessions in one config place.
+- No magic numbers. Put values like the 150 ms debounce or the 3 second tap timeout in one config place.
 - Config and keys come from `.env` through one settings module. Never hardcode them.
 - Fail loudly with clear errors. Do not swallow exceptions silently.
 - Follow the language style: PEP 8 for Python, and the usual TypeScript and React patterns.

@@ -1,0 +1,138 @@
+{
+  "schemaVersion": 1,
+  "lang": "en",
+  "project": "Rehabit",
+  "round": "Play flow 04",
+  "brief": "Soft Bento. The full Play flow (menu, game, talk, mood, done) and the chosen dashboard.",
+  "candidates": [
+    {
+      "id": "1-menu",
+      "name": "Play 1: Menu",
+      "concept": "Pick a game. The empty ring waits around the hand, so the next screen feels familiar.",
+      "typography": "Plus Jakarta Sans 700 / 500",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "Game list on the left",
+        "Empty ring preview",
+        "One Start button",
+        "Palm talk card"
+      ],
+      "kind": "html",
+      "source": "1-menu.html"
+    },
+    {
+      "id": "2-game",
+      "name": "Play 2: Game",
+      "concept": "The ring fills one tick per good tap. Coach on the left, live numbers on the right.",
+      "typography": "Plus Jakarta Sans 700 / 500",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "20-tick ring",
+        "Big counter",
+        "Coach bubble",
+        "Live stats"
+      ],
+      "kind": "html",
+      "source": "2-game.html"
+    },
+    {
+      "id": "3-talk",
+      "name": "Play 3: Talk",
+      "concept": "Palm coin glows while the companion talks. Chat lines and a voice wave show we are listening.",
+      "typography": "Plus Jakarta Sans 700 / 500",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "Palm coin lit",
+        "Chat bubbles",
+        "Voice wave",
+        "End talk"
+      ],
+      "kind": "html",
+      "source": "3-talk.html"
+    },
+    {
+      "id": "4-mood",
+      "name": "Play 4: Mood",
+      "concept": "The five fingertip coins are the mood scale. The patient answers with a tap, not a click.",
+      "typography": "Plus Jakarta Sans 700 / 500",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "Fingertips as 1 to 5",
+        "Big labelled scale",
+        "Pad 4 picked"
+      ],
+      "kind": "html",
+      "source": "4-mood.html"
+    },
+    {
+      "id": "5-done",
+      "name": "Play 5: Done",
+      "concept": "Ring almost full, a warm Shabash and two clear next steps.",
+      "typography": "Plus Jakarta Sans 700 / 500",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "18 of 20 ticks",
+        "Two result tiles",
+        "Play again"
+      ],
+      "kind": "html",
+      "source": "5-done.html"
+    },
+    {
+      "id": "dash",
+      "name": "Dashboard A",
+      "concept": "Chosen dashboard: bento tiles with a sidebar.",
+      "typography": "Plus Jakarta Sans 700 / 500",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "Sidebar",
+        "Bento tiles",
+        "Call now"
+      ],
+      "kind": "html",
+      "source": "dash.html"
+    }
+  ]
+}
