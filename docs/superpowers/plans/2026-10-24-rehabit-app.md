@@ -91,7 +91,7 @@ frontend/src/
 
 - [ ] `npm create vite@latest` into a temp folder (react-ts), copy it into `frontend/`, and install `tailwindcss @tailwindcss/vite react-router-dom lucide-react @fontsource/plus-jakarta-sans sarvam-conv-ai-sdk`.
 - [ ] `index.css`: `@import "tailwindcss";` and a `@theme` block with the Soft Bento colors as `--color-*`, `--font-sans: "Plus Jakarta Sans"`, and `--radius-card: 28px`.
-- [ ] `shared/HandBoard.tsx`: port `FINGERS`, `PALM`, `COIN_AT` and `point()` from the design `hand.py`. Props: `{ live?: number | null; hit?: number | null; miss?: number | null; hand: "left" | "right"; size: number }`. The left hand is `scale(-1,1)` on the shapes only, so the coin numbers stay readable.
+- [ ] `shared/HandBoard.tsx`: port `FINGERS`, `PALM`, `COIN_AT` and `point()` from `design/hand/hand.py`. Props: `{ live?: number | null; hit?: number | null; miss?: number | null; hand: "left" | "right"; size: number }`. The left hand is `scale(-1,1)` on the shapes only, so the coin numbers stay readable.
 - [ ] `shared/Ring.tsx`: props `{ lit: number; total: number; size: number; showTicks?: boolean; children }`.
 - [ ] `shared/useDeviceSocket.ts`: connects to `/ws/game`, reconnects after 1 s, and calls `onEvent(msg)`. Keyboard keys 1 to 6 give a tap, and holding 6 for 2 s gives a hold.
 - [ ] **Verify:** `npm run dev`. A temp page shows HandBoard, and a tap from fake_device (or the keyboard) lights the right coin.
