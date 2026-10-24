@@ -118,7 +118,7 @@ pio device monitor
 
 # Backend
 cd backend
-uvicorn main:app --reload --port 8000
+uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 # Frontend
 cd frontend
@@ -126,6 +126,10 @@ npm run dev
 ```
 
 If upload stops at "Connecting...", hold the BOOT button on the board.
+
+`--host 0.0.0.0` lets the board reach the backend over the hotspot. Without it the backend only listens on the laptop itself.
+
+Firmware settings live in `firmware/include/secrets.h` (not committed). Copy `secrets.example.h` and fill in the hotspot name and password, the laptop IP (`ipconfig`), and the same `DEVICE_TOKEN` as in `.env`.
 
 ## Environment variables
 
