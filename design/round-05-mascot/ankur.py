@@ -159,8 +159,24 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 .mock .bar{display:flex;align-items:center;gap:12px;padding:22px 32px}
 .mock main{display:grid;grid-template-columns:1fr 520px 1fr;align-items:center;gap:20px;padding:0 32px 32px}
 .mock .left{display:flex;flex-direction:column;gap:6px}
-.mock .speech{display:flex;align-items:flex-end;gap:6px;margin-top:10px}
-.mock .say{background:var(--sf);border-radius:20px 20px 20px 6px;padding:12px 16px;box-shadow:var(--sh);font-weight:700;font-size:15px;margin-bottom:60px}
+.mock .speech{display:flex;align-items:flex-start;margin-top:34px}
+.think{position:relative;isolation:isolate;margin:-26px 0 0 -10px;background:var(--sf);border-radius:30px;padding:14px 20px;
+  filter:drop-shadow(0 10px 18px rgba(27,21,48,.09));font-weight:700;font-size:16px;max-width:220px;display:grid;
+  transform-origin:0% 100%;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
+.think::before,.think::after{content:'';position:absolute;z-index:-1;background:var(--sf);border-radius:50%}
+.think::before{width:44px;height:44px;top:-16px;left:18px} .think::after{width:34px;height:34px;top:-11px;right:26px}
+.think>.dots,.think>.line{grid-area:1/1;align-self:center}
+.think em{position:absolute;background:var(--sf);border-radius:50%}
+.think .t1{width:16px;height:16px;left:6px;bottom:-12px} .think .t2{width:9px;height:9px;left:-6px;bottom:-24px}
+.dots{display:flex;gap:5px;padding:4px 0} .dots i{width:8px;height:8px;border-radius:50%;background:var(--mu);opacity:.5;animation:dot 1s ease-in-out infinite}
+.dots i:nth-child(2){animation-delay:.15s} .dots i:nth-child(3){animation-delay:.3s}
+.loop .dots{animation:dots-vis 4s infinite} .loop .line{animation:line-vis 4s infinite}
+@keyframes pop{from{transform:scale(.6);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes dot{0%,100%{transform:translateY(0);opacity:.35}50%{transform:translateY(-4px);opacity:.9}}
+@keyframes dots-vis{0%,28%{opacity:1}34%,100%{opacity:0}}
+@keyframes line-vis{0%,30%{opacity:0;transform:scale(.9)}38%,100%{opacity:1;transform:scale(1)}}
+.bubbles{display:flex;gap:28px;flex-wrap:wrap;margin-top:16px;align-items:flex-start}
+.bubbles .speech{display:flex;align-items:flex-start;background:var(--bg);border:1px solid var(--ln);border-radius:24px;padding:56px 28px 18px}
 .count{font:700 80px/1 'Jakarta';letter-spacing:-.04em} .count small{font-size:26px;color:var(--mu);font-weight:500}
 .stat{border-radius:22px;padding:16px 18px} .stat .big{font-size:32px}
 .right{display:flex;flex-direction:column;gap:12px}
@@ -169,6 +185,13 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 .rules div{background:var(--sf);border-radius:22px;padding:18px;box-shadow:var(--sh)} .rules b{display:block;margin-bottom:4px}
 .rules p{font-size:14px;color:var(--mu)}
 """
+
+
+def thought(line, loop=True):
+    """Thought bubble: thinking dots first, then the coach line pops in."""
+    dots = "<span class='dots'><i></i><i></i><i></i></span>"
+    return (f"<div class='think{' loop' if loop else ''}'>{dots}<span class='line'>{line}</span>"
+            "<em class='t1'></em><em class='t2'></em></div>")
 
 
 def state_card(sid, name, when, motion, eyes, mouth, extra):
@@ -191,7 +214,7 @@ def page():
     game = f"""
 <div class='mock'><div class='bar'><span class='logo'>rehabit<i></i></span><span class='pill'><b>Classic</b> · Right hand</span><span class='pill' style='margin-left:auto'>Stop</span></div>
 <main><div class='left'><span style='color:var(--mu)'>Good taps</span><span class='count num'>7<small> / 20</small></span>
-<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', 3, False, 150)}<div class='say'>Bahut badhiya!<br><span style='font-weight:500;font-size:12px;color:var(--mu)'>Ankur</span></div></div></div>
+<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', 3, False, 150)}{thought('Bahut badhiya!')}</div></div>
 {ring(7, hand(300), size=520)}
 <div class='right'><div class='stat' style='background:var(--mint)'><span class='k'>This tap</span><span class='big num'>386<small>ms</small></span></div>
 <div class='stat' style='background:var(--peach)'><span class='k'>In a row</span><span class='big num'>5</span></div>
@@ -210,6 +233,12 @@ def page():
 <div class='grow'>{grow}</div>
 <h2>In the game</h2><p class='lead'>Ankur takes the coach bubble's place in the left column, far from the hand, so he never covers the glowing coin.</p>
 {game}
+<h2>Thought bubble</h2><p class='lead'>Ankur's lines sit in a soft cloud bubble that trails down to his head. It shows thinking dots for a moment, then the line pops in. The voice clip plays at the same time as the line.</p>
+<div class='bubbles'>
+<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', 3, False, 130)}{thought('Bahut badhiya! Aise hi karte raho.')}</div>
+<div class='speech'>{ankur('encourage', 'kind', 'soft', '', 3, False, 130)}{thought('Koi baat nahi, agla try karo.')}</div>
+<div class='speech'>{ankur('push', 'focus', 'smile', '', 3, False, 130)}{thought('Bas 5 aur! Aap kar sakte ho.')}</div>
+</div>
 <h2>Rules</h2>
 <div class='rules'><div><b>Calm while a coin glows</b><p>Big moves only between targets, so reaction time stays fair. While a coin glows he only glances at it.</p></div>
 <div><b>Never sad, never scolds</b><p>A miss gets a tilt and a thumbs up. A low mood gets a hug and a warm glow, never a hop.</p></div>
