@@ -1,0 +1,427 @@
+<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Ankur design sheet</title>
+<style>
+@font-face{font-family:'Jakarta';font-weight:500;src:url(fonts/plus-jakarta-sans-500.woff2) format('woff2')}
+@font-face{font-family:'Jakarta';font-weight:700;src:url(fonts/plus-jakarta-sans-700.woff2) format('woff2')}
+:root{--bg:#F3F0FA;--sf:#FFFFFF;--tx:#1B1530;--mu:#5F5979;--ac:#6B4EF6;--ln:#E4DEF5;--mint:#DDF5E8;--peach:#FFE7D9;--lilac:#E9E3FF;
+--sh:0 1px 2px rgba(27,21,48,.04),0 18px 40px rgba(27,21,48,.07)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font:500 16px/1.5 'Jakarta',sans-serif;width:1280px;height:900px;padding:32px 40px;display:flex;flex-direction:column;gap:22px;overflow:hidden}
+.top{display:flex;align-items:center;gap:14px}
+.logo{font:700 24px/1 'Jakarta';letter-spacing:-.02em} .logo i{display:inline-block;width:11px;height:11px;border-radius:50%;background:var(--ac);margin-left:3px}
+.pill{font-size:14px;padding:8px 14px;border-radius:99px;background:var(--sf);border:1px solid var(--ln)}
+.tile{background:var(--sf);border-radius:28px;box-shadow:var(--sh);padding:24px}
+.flat{box-shadow:none}
+.k{color:var(--mu);font-size:14px}
+.num{font-variant-numeric:tabular-nums}
+.big{font:700 40px/1 'Jakarta';letter-spacing:-.03em;display:block;margin:8px 0 4px} .big small{font-size:18px;font-weight:500;color:var(--mu);margin-left:3px}
+.btn{display:inline-flex;align-items:center;justify-content:center;font:700 19px/1 'Jakarta';padding:20px 30px;border-radius:99px;border:1px solid var(--ln);background:var(--sf);color:var(--tx)}
+.btn.primary{background:var(--ac);color:#fff;border-color:var(--ac)} .btn.dark{background:var(--tx);color:#fff;border-color:var(--tx)}
+.bubble{background:var(--sf);border-radius:22px 22px 22px 6px;padding:14px 18px;box-shadow:var(--sh);font-weight:700}
+.bubble span{display:block;font-weight:500;font-size:13px;color:var(--mu)}
+h1{font:700 34px/1.15 'Jakarta';letter-spacing:-.02em} h2{font:700 20px/1.2 'Jakarta'}
+
+body{width:auto;height:auto;overflow:visible;display:block;padding:40px 48px 60px;max-width:1280px;margin:0 auto}
+h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);max-width:720px;margin-top:8px}
+.hero{display:grid;grid-template-columns:300px 1fr;gap:36px;align-items:center;background:var(--sf);border-radius:32px;padding:32px;box-shadow:var(--sh);margin-top:24px}
+.hero .stage{background:linear-gradient(180deg,#F3F0FA,#E9F7E5);border-radius:28px;display:grid;place-items:center;padding:20px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px} .chip{display:flex;align-items:center;gap:8px;font-size:13px;padding:6px 12px 6px 6px;border-radius:99px;background:var(--bg)}
+.chip i{width:22px;height:22px;border-radius:50%}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px} .facts div{background:var(--bg);border-radius:18px;padding:14px} .facts b{display:block}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.state{background:var(--sf);border-radius:24px;padding:16px 18px 18px;box-shadow:var(--sh)}
+.state .pic{height:190px;display:grid;place-items:center;background:var(--bg);border-radius:18px;position:relative}
+.state h3{font-size:17px;margin-top:12px} .state .when{font-size:13px;color:var(--ac);font-weight:700;margin-top:2px} .state p{font-size:13px;color:var(--mu);margin-top:4px;line-height:1.4}
+.tag{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--mint);color:#1F6B47}
+.pad{position:absolute;right:16px;top:58px;width:26px;height:26px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 8px rgba(107,78,246,.2)}
+.grow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
+.grow .state .pic{background:linear-gradient(180deg,#F3F0FA,#E9F7E5)}
+.mock{margin-top:16px;background:var(--bg);border-radius:32px;border:1px solid var(--ln);overflow:hidden}
+.mock .bar{display:flex;align-items:center;gap:12px;padding:22px 32px}
+.mock main{display:grid;grid-template-columns:1fr 520px 1fr;align-items:center;gap:20px;padding:0 32px 32px}
+.mock .left{display:flex;flex-direction:column;gap:6px}
+.mock .speech{display:flex;align-items:flex-end;gap:6px;margin-top:10px}
+.mock .say{background:var(--sf);border-radius:20px 20px 20px 6px;padding:12px 16px;box-shadow:var(--sh);font-weight:700;font-size:15px;margin-bottom:60px}
+.count{font:700 80px/1 'Jakarta';letter-spacing:-.04em} .count small{font-size:26px;color:var(--mu);font-weight:500}
+.stat{border-radius:22px;padding:16px 18px} .stat .big{font-size:32px}
+.right{display:flex;flex-direction:column;gap:12px}
+.ring{position:relative} .ring>svg{position:absolute;inset:0} .ring .inner{position:absolute;inset:0;display:grid;place-items:center}
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+.rules div{background:var(--sf);border-radius:22px;padding:18px;box-shadow:var(--sh)} .rules b{display:block;margin-bottom:4px}
+.rules p{font-size:14px;color:var(--mu)}
+
+.ankur{overflow:visible}
+.plant,.arm,.crown,.face,.look,.flower,.spark,.glow,.talk,.z{transform-box:fill-box}
+.plant{transform-origin:50% 100%}
+.arm-l{transform-origin:100% 50%} .arm-r{transform-origin:0% 50%}
+.crown{transform-origin:50% 100%}
+@keyframes bob{50%{transform:translateY(-4px)}}
+@keyframes blink{0%,94%,100%{transform:scaleY(1)}97%{transform:scaleY(.1)}}
+@keyframes look{0%,15%{transform:translateX(0)}35%,85%{transform:translateX(5px) translateY(-2px)}100%{transform:translateX(0)}}
+@keyframes hop{0%,100%{transform:translateY(0) scale(1)}25%{transform:translateY(0) scale(1.08,.9)}55%{transform:translateY(-10px) scale(.95,1.06)}80%{transform:translateY(0) scale(1.04,.96)}}
+@keyframes jump{0%,100%{transform:translateY(0)}40%{transform:translateY(-22px)}60%{transform:translateY(-22px)}}
+@keyframes armsup-l{0%,100%{transform:rotate(0)}40%,60%{transform:rotate(55deg)}}
+@keyframes armsup-r{0%,100%{transform:rotate(0)}40%,60%{transform:rotate(-55deg)}}
+@keyframes spark{0%,100%{transform:scale(0);opacity:0}40%,70%{transform:scale(1);opacity:1}}
+@keyframes tilt{0%,100%{transform:rotate(0)}30%,80%{transform:rotate(-7deg)}}
+@keyframes thumb{0%,100%{transform:rotate(0)}30%,80%{transform:rotate(-70deg)}}
+@keyframes pump{0%,100%{transform:rotate(0)}25%,75%{transform:rotate(-40deg)}50%{transform:rotate(10deg)}}
+@keyframes pumpl{0%,100%{transform:rotate(0)}25%,75%{transform:rotate(40deg)}50%{transform:rotate(-10deg)}}
+@keyframes lean{0%,100%{transform:rotate(0)}50%{transform:rotate(5deg) translateY(2px)}}
+@keyframes talk{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1.2)}}
+@keyframes sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+@keyframes bloom{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@keyframes hug-l{0%,100%{transform:rotate(-35deg)}50%{transform:rotate(-45deg)}}
+@keyframes hug-r{0%,100%{transform:rotate(35deg)}50%{transform:rotate(45deg)}}
+@keyframes glow{0%,100%{transform:scale(.92);opacity:.12}50%{transform:scale(1.05);opacity:.28}}
+@keyframes droop{0%,100%{transform:rotate(18deg) scaleY(.9)}50%{transform:rotate(22deg) scaleY(.86)}}
+@keyframes z{0%{transform:translate(0,0);opacity:0}30%{opacity:1}100%{transform:translate(10px,-24px);opacity:0}}
+@keyframes chin{0%,100%{transform:rotate(-70deg)}50%{transform:rotate(-78deg)}}
+.st-idle .plant{animation:bob 3s ease-in-out infinite} .face{transform-origin:50% 50%}
+.st-idle .face,.st-watch .face,.st-listen .face,.st-speak .face{animation:blink 5s infinite}
+.st-watch .look{animation:look 3s ease-in-out infinite}
+.st-happy .plant{animation:hop 1.4s ease-out infinite}
+.st-cheer .plant{animation:jump 1.6s cubic-bezier(.3,.7,.4,1) infinite}
+.st-cheer .arm-l,.st-celebrate .arm-l{animation:armsup-l 1.6s ease-in-out infinite} .st-cheer .arm-r,.st-celebrate .arm-r{animation:armsup-r 1.6s ease-in-out infinite}
+.spark{transform-origin:50% 50%;animation:spark 1.6s ease-out infinite}
+.st-encourage .plant{animation:tilt 2.4s ease-in-out infinite} .st-encourage .arm-r{animation:thumb 2.4s ease-in-out infinite}
+.st-push .arm-r{animation:pump .9s ease-in-out infinite} .st-push .arm-l{animation:pumpl .9s ease-in-out infinite}
+.st-listen .plant{animation:lean 2.6s ease-in-out infinite}
+.st-speak .talk{transform-origin:50% 50%;animation:talk .35s ease-in-out infinite} .st-speak .crown{animation:sway 2s ease-in-out infinite}
+.st-celebrate .plant{animation:sway 1.2s ease-in-out infinite} .st-celebrate .flower{transform-origin:50% 100%;animation:bloom 1s ease-out both}
+.st-comfort .arm-l{animation:hug-l 3s ease-in-out infinite} .st-comfort .arm-r{animation:hug-r 3s ease-in-out infinite}
+.st-comfort .plant{animation:sway 4s ease-in-out infinite} .glow{transform-origin:50% 50%;animation:glow 3s ease-in-out infinite}
+.st-think .arm-r{animation:chin 2.6s ease-in-out infinite}
+.st-sleepy .crown,.st-sleepy .arm-r{animation:droop 4s ease-in-out infinite} .st-sleepy .arm-l{transform:rotate(-18deg)}
+.z{animation:z 2.4s ease-out infinite}
+@media (prefers-reduced-motion:reduce){.ankur *{animation:none!important}}
+.pill{font-size:14px;padding:8px 14px;border-radius:99px;background:var(--sf);border:1px solid var(--ln)}</style></head><body>
+<h1>Ankur, our little sprout</h1>
+<p class='lead'>Recovery is a habit, and habits grow. Ankur lives in a small clay pot and grows a new leaf on each day of the streak. He cheers between taps, stays calm while a coin glows, and never looks sad.</p>
+<section class='hero'><div class='stage'><svg viewBox='20 10 160 210' width='230' class='ankur st-idle' role='img' aria-label='Ankur idle'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div>
+<div><h2 style='margin:0'>Character</h2><p class='lead'>A chubby round sprout with two leaf arms and a leaf crown. Big kind eyes, peach cheeks, a terracotta pot with a white dotted rangoli band. Warm and gentle for adults, not a kids' cartoon.</p>
+<div class='chips'><span class='chip'><i style='background:#8BD47E'></i>Body #8BD47E</span><span class='chip'><i style='background:#5FB257'></i>Leaf #5FB257</span><span class='chip'><i style='background:#D9774B'></i>Clay pot #D9774B</span><span class='chip'><i style='background:#FF9F8A'></i>Cheeks #FF9F8A</span><span class='chip'><i style='background:#FFB3C7'></i>Petal #FFB3C7</span><span class='chip'><i style='background:#FFC93C'></i>Sparkle #FFC93C</span></div>
+<div class='facts'><div><b>Name</b><span class='k'>Ankur means sprout</span></div><div><b>Voice</b><span class='k'>The coach lines, Hinglish</span></div><div><b>Sizes</b><span class='k'>150 game · 96 menu · 72 cards</span></div></div></div></section>
+<h2>States</h2><p class='lead'>Each state is driven by events the app already has. All motions are CSS on a single SVG, and all stop when the device asks for reduced motion.</p>
+<div class='grid'><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-idle' role='img' aria-label='Ankur idle'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Idle</h3><div class='when'>Menu, nothing happening</div><p>Slow bob (4 px, 3 s), blinks every few seconds</p></div><div class='state'><div class='pic'><span class='pad' title='glowing pad'></span><svg viewBox='20 10 160 210' width='150' class='ankur st-watch' role='img' aria-label='Ankur watch'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><g class='look'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Watching</h3><div class='when'>A pad is glowing</div><p>Body still. Eyes slide toward the glowing pad</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-happy' role='img' aria-label='Ankur happy'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,114 Q87,106 93,114 M107,114 Q113,106 119,114' stroke='#1B1530' stroke-width='3.2' fill='none' stroke-linecap='round'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Happy</h3><div class='when'>Good tap</div><p>Quick squash and bounce, 200 ms</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-cheer' role='img' aria-label='Ankur cheer'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,114 Q87,106 93,114 M107,114 Q113,106 119,114' stroke='#1B1530' stroke-width='3.2' fill='none' stroke-linecap='round'/><path d='M89,122 Q100,138 111,122 Z' fill='#1B1530'/><path d='M94,129 Q100,134 106,129' fill='#FF8A80'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+<path class='spark' style='animation-delay:0ms' d='M40,53 L42,58 L47,60 L42,62 L40,67 L38,62 L33,60 L38,58 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:90ms' d='M160,45 L162,50 L167,52 L162,54 L160,59 L158,54 L153,52 L158,50 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:180ms' d='M34,113 L36,118 L41,120 L36,122 L34,127 L32,122 L27,120 L32,118 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:270ms' d='M168,105 L170,110 L175,112 L170,114 L168,119 L166,114 L161,112 L166,110 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:360ms' d='M60,23 L62,28 L67,30 L62,32 L60,37 L58,32 L53,30 L58,28 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:450ms' d='M140,19 L142,24 L147,26 L142,28 L140,33 L138,28 L133,26 L138,24 Z' fill='#FFC93C'/></svg></div><h3>Cheer</h3><div class='when'>5 good taps in a row</div><p>Jumps, leaf arms up, gold sparkles pop</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-encourage' role='img' aria-label='Ankur encourage'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,113 Q87,108 93,113 M107,113 Q113,108 119,113' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M95,125 Q100,128 105,125' stroke='#1B1530' stroke-width='2.8' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Encourage</h3><div class='when'>A miss</div><p>Head tilt, one leaf gives a thumbs up. Never sad</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-push' role='img' aria-label='Ankur push'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M81,103 L92,104.5 M108,104.5 L119,103' stroke='#1B1530' stroke-width='2.6' stroke-linecap='round'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Push</h3><div class='when'>Last 5 taps</div><p>Determined brows, leaf arms pump twice</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-listen' role='img' aria-label='Ankur listen'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M95,125 Q100,128 105,125' stroke='#1B1530' stroke-width='2.8' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Listening</h3><div class='when'>Companion is listening</div><p>Leans in and nods slowly</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-speak' role='img' aria-label='Ankur speak'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><ellipse class='talk' cx='100' cy='126' rx='5' ry='4' fill='#1B1530'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Speaking</h3><div class='when'>Companion is speaking</div><p>Mouth opens and closes, leaves sway</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-celebrate' role='img' aria-label='Ankur celebrate'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/><g class='flower'><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(0 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(72 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(144 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(216 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(288 100 52)'/><circle cx='100' cy='52' r='6' fill='#FFD45C'/></g></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,114 Q87,106 93,114 M107,114 Q113,106 119,114' stroke='#1B1530' stroke-width='3.2' fill='none' stroke-linecap='round'/><path d='M89,122 Q100,138 111,122 Z' fill='#1B1530'/><path d='M94,129 Q100,134 106,129' fill='#FF8A80'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+<path class='spark' style='animation-delay:0ms' d='M40,53 L42,58 L47,60 L42,62 L40,67 L38,62 L33,60 L38,58 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:90ms' d='M160,45 L162,50 L167,52 L162,54 L160,59 L158,54 L153,52 L158,50 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:180ms' d='M34,113 L36,118 L41,120 L36,122 L34,127 L32,122 L27,120 L32,118 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:270ms' d='M168,105 L170,110 L175,112 L170,114 L168,119 L166,114 L161,112 L166,110 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:360ms' d='M60,23 L62,28 L67,30 L62,32 L60,37 L58,32 L53,30 L58,28 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:450ms' d='M140,19 L142,24 L147,26 L142,28 L140,33 L138,28 L133,26 L138,24 Z' fill='#FFC93C'/></svg></div><h3>Celebrate</h3><div class='when'>Game done</div><p>Flower blooms on top, happy sway, sparkles</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-comfort' role='img' aria-label='Ankur comfort'>
+<circle class='glow' cx='100' cy='120' r='62' fill='#FFC93C' opacity='.18'/><ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,111 Q87,117 93,111 M107,111 Q113,117 119,111' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/><path d='M95,125 Q100,128 105,125' stroke='#1B1530' stroke-width='2.8' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Comfort</h3><div class='when'>Mood 1 or 2</div><p>Leaves hug the body, slow warm glow. No hopping</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-think' role='img' aria-label='Ankur think'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><ellipse cx='100' cy='126' rx='3' ry='3.5' fill='#1B1530'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Thinking</h3><div class='when'>Mood question</div><p>Leaf on chin, eyes look up</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-sleepy' role='img' aria-label='Ankur sleepy'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,111 Q87,117 93,111 M107,111 Q113,117 119,111' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/><ellipse cx='100' cy='126' rx='3' ry='3.5' fill='#1B1530'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+<text class='z' x='138' y='70' font-size='22' font-weight='700' fill='#5F5979'>z</text></svg></div><h3>Sleepy</h3><div class='when'>Board not connected</div><p>Eyes closed, leaves droop, a floating z</p></div></div>
+<h2>Growth over the week</h2><p class='lead'>The streak becomes something you can see. A missed day does not hurt Ankur, he just does not grow that day.</p>
+<div class='grow'><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-idle' role='img' aria-label='Ankur idle'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Day 1</h3><p>First session. A tiny sprout with one leaf.</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-idle' role='img' aria-label='Ankur idle'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Day 3</h3><p>Two leaves. The habit is starting.</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-idle' role='img' aria-label='Ankur idle'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#4A9A45' transform='translate(99 70) rotate(-165) scale(.85)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#4A9A45' transform='translate(100 70) rotate(-15) scale(.85)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><ellipse cx='87' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><ellipse cx='113' cy='112' rx='5.5' ry='6.5' fill='#1B1530'/><circle cx='89' cy='109.5' r='1.8' fill='#fff'/><circle cx='115' cy='109.5' r='1.8' fill='#fff'/><path d='M92,124 Q100,131 108,124' stroke='#1B1530' stroke-width='3' fill='none' stroke-linecap='round'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Day 5</h3><p>Four leaves. Strong and steady.</p></div><div class='state'><div class='pic'><svg viewBox='20 10 160 210' width='150' class='ankur st-idle' role='img' aria-label='Ankur idle'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#4A9A45' transform='translate(99 70) rotate(-165) scale(.85)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#4A9A45' transform='translate(100 70) rotate(-15) scale(.85)'/><g class='flower'><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(0 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(72 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(144 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(216 100 52)'/><ellipse cx='100' cy='44' rx='6' ry='9' fill='#FFB3C7' transform='rotate(288 100 52)'/><circle cx='100' cy='52' r='6' fill='#FFD45C'/></g></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,114 Q87,106 93,114 M107,114 Q113,106 119,114' stroke='#1B1530' stroke-width='3.2' fill='none' stroke-linecap='round'/><path d='M89,122 Q100,138 111,122 Z' fill='#1B1530'/><path d='M94,129 Q100,134 106,129' fill='#FF8A80'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+</svg></div><h3>Day 7</h3><p>A flower with 5 petals, one for each finger.</p></div></div>
+<h2>In the game</h2><p class='lead'>Ankur takes the coach bubble's place in the left column, far from the hand, so he never covers the glowing coin.</p>
+
+<div class='mock'><div class='bar'><span class='logo'>rehabit<i></i></span><span class='pill'><b>Classic</b> · Right hand</span><span class='pill' style='margin-left:auto'>Stop</span></div>
+<main><div class='left'><span style='color:var(--mu)'>Good taps</span><span class='count num'>7<small> / 20</small></span>
+<div class='speech'><svg viewBox='20 10 160 210' width='150' class='ankur st-cheer' role='img' aria-label='Ankur cheer'>
+<ellipse cx='100' cy='213' rx='46' ry='6' fill='#1B1530' opacity='.08'/>
+<g class='plant'>
+  <g class='arm arm-l'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(64 128) scale(-1 1)'/></g>
+  <g class='arm arm-r'><path d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(136 128)'/></g>
+  <g class='crown'><path d='M100,80 Q97,68 100,56' stroke='#4A9A45' stroke-width='4' fill='none' stroke-linecap='round'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-150) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#5FB257' transform='translate(100 60) rotate(-30) scale(1.15)'/><path class='head-leaf' d='M0,0 Q13,-11 28,-2 Q14,9 0,0 Z' fill='#4A9A45' transform='translate(99 70) rotate(-165) scale(.85)'/></g>
+  <ellipse cx='100' cy='120' rx='38' ry='41' fill='#8BD47E'/>
+  <path d='M64,128 Q100,170 136,128 Q132,160 100,161 Q68,160 64,128 Z' fill='#6DBE63' opacity='.7'/>
+  <ellipse cx='84' cy='96' rx='9' ry='6' fill='#B8EBAA' opacity='.8' transform='rotate(-25 84 96)'/>
+  <ellipse cx='78' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/><ellipse cx='122' cy='124' rx='6' ry='4' fill='#FF9F8A' opacity='.75'/>
+  <g class='face'><path d='M81,114 Q87,106 93,114 M107,114 Q113,106 119,114' stroke='#1B1530' stroke-width='3.2' fill='none' stroke-linecap='round'/><path d='M89,122 Q100,138 111,122 Z' fill='#1B1530'/><path d='M94,129 Q100,134 106,129' fill='#FF8A80'/></g>
+</g>
+<path d='M60,160 L140,160 L131,206 Q100,214 69,206 Z' fill='#D9774B'/>
+<rect x='54' y='150' width='92' height='16' rx='7' fill='#E58C5F'/>
+<ellipse cx='100' cy='151' rx='40' ry='4' fill='#6B4A3A'/>
+<path d='M70,182 Q100,190 130,182' stroke='#fff' stroke-width='3' fill='none' stroke-dasharray='2 7' stroke-linecap='round' opacity='.75'/>
+<path d='M66,170 L134,170' stroke='#B85E36' stroke-width='2' opacity='.35'/>
+<path class='spark' style='animation-delay:0ms' d='M40,53 L42,58 L47,60 L42,62 L40,67 L38,62 L33,60 L38,58 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:90ms' d='M160,45 L162,50 L167,52 L162,54 L160,59 L158,54 L153,52 L158,50 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:180ms' d='M34,113 L36,118 L41,120 L36,122 L34,127 L32,122 L27,120 L32,118 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:270ms' d='M168,105 L170,110 L175,112 L170,114 L168,119 L166,114 L161,112 L166,110 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:360ms' d='M60,23 L62,28 L67,30 L62,32 L60,37 L58,32 L53,30 L58,28 Z' fill='#FFC93C'/><path class='spark' style='animation-delay:450ms' d='M140,19 L142,24 L147,26 L142,28 L140,33 L138,28 L133,26 L138,24 Z' fill='#FFC93C'/></svg><div class='say'>Bahut badhiya!<br><span style='font-weight:500;font-size:12px;color:var(--mu)'>Ankur</span></div></div></div>
+<div class='ring' style='width:520px;height:520px'><svg viewBox='0 0 520 520'><circle cx='260.0' cy='260.0' r='210.0' fill='#FFFFFF'/><path d='M272.6,20.3 A240.0,240.0 0 0 1 322.1,28.2' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M346.0,35.9 A240.0,240.0 0 0 1 390.7,58.7' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M411.0,73.5 A240.0,240.0 0 0 1 446.5,109.0' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M461.3,129.3 A240.0,240.0 0 0 1 484.1,174.0' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M491.8,197.9 A240.0,240.0 0 0 1 499.7,247.4' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M499.7,272.6 A240.0,240.0 0 0 1 491.8,322.1' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M484.1,346.0 A240.0,240.0 0 0 1 461.3,390.7' stroke='#6B4EF6' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M446.5,411.0 A240.0,240.0 0 0 1 411.0,446.5' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M390.7,461.3 A240.0,240.0 0 0 1 346.0,484.1' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M322.1,491.8 A240.0,240.0 0 0 1 272.6,499.7' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M247.4,499.7 A240.0,240.0 0 0 1 197.9,491.8' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M174.0,484.1 A240.0,240.0 0 0 1 129.3,461.3' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M109.0,446.5 A240.0,240.0 0 0 1 73.5,411.0' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M58.7,390.7 A240.0,240.0 0 0 1 35.9,346.0' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M28.2,322.1 A240.0,240.0 0 0 1 20.3,272.6' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M20.3,247.4 A240.0,240.0 0 0 1 28.2,197.9' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M35.9,174.0 A240.0,240.0 0 0 1 58.7,129.3' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M73.5,109.0 A240.0,240.0 0 0 1 109.0,73.5' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M129.3,58.7 A240.0,240.0 0 0 1 174.0,35.9' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/><path d='M197.9,28.2 A240.0,240.0 0 0 1 247.4,20.3' stroke='#E9E3FF' stroke-width='16' stroke-linecap='round' fill='none'/></svg><div class='inner'><svg viewBox='20 30 350 470' width='300' role='img' aria-label='Hand board, pad 3 glowing'><g fill='#D6CDF3' stroke='#D6CDF3' stroke-width='5' stroke-linejoin='round'><path d='M170,488 C160,452 150,424 140,392 C128,360 134,322 150,286 L162,236 Q170,214 196,210 L272,214 Q306,222 308,258 L304,352 C300,406 290,446 280,488 Z'/><path d='M151.9,382.1 L52.2,307.8 A22.0,22.0 0 0 1 76.8,271.4 L182.9,336.1 Z'/><path d='M158.5,246.3 L137.3,86.7 A19.0,19.0 0 0 1 174.9,80.8 L204.0,239.1 Z'/><path d='M196.3,236.1 L197.7,54.4 A19.5,19.5 0 0 1 236.7,53.7 L244.5,235.3 Z'/><path d='M235.0,240.7 L259.2,76.8 A18.5,18.5 0 0 1 295.9,81.3 L279.7,246.2 Z'/><path d='M270.7,261.8 L310.3,144.0 A16.0,16.0 0 0 1 340.9,153.4 L307.9,273.2 Z'/></g><g fill='#EDE8FB'><path d='M170,488 C160,452 150,424 140,392 C128,360 134,322 150,286 L162,236 Q170,214 196,210 L272,214 Q306,222 308,258 L304,352 C300,406 290,446 280,488 Z'/><path d='M151.9,382.1 L52.2,307.8 A22.0,22.0 0 0 1 76.8,271.4 L182.9,336.1 Z'/><path d='M158.5,246.3 L137.3,86.7 A19.0,19.0 0 0 1 174.9,80.8 L204.0,239.1 Z'/><path d='M196.3,236.1 L197.7,54.4 A19.5,19.5 0 0 1 236.7,53.7 L244.5,235.3 Z'/><path d='M235.0,240.7 L259.2,76.8 A18.5,18.5 0 0 1 295.9,81.3 L279.7,246.2 Z'/><path d='M270.7,261.8 L310.3,144.0 A16.0,16.0 0 0 1 340.9,153.4 L307.9,273.2 Z'/></g><circle cx='82.4' cy='301.7' r='15' fill='#D9D2F0'/><text x='82.4' y='306.7' text-anchor='middle' font-size='15' font-weight='700' fill='#5F5979'>1</text><circle cx='160.5' cy='111.4' r='15' fill='#D9D2F0'/><text x='160.5' y='116.4' text-anchor='middle' font-size='15' font-weight='700' fill='#5F5979'>2</text><circle cx='217.8' cy='85.6' r='29' fill='#8E77FF' opacity='.16'/><circle cx='217.8' cy='85.6' r='22' fill='#8E77FF' opacity='.26'/><circle cx='217.8' cy='85.6' r='15' fill='#6B4EF6'/><text x='217.8' y='90.6' text-anchor='middle' font-size='15' font-weight='700' fill='#FFFFFF'>3</text><circle cx='274.0' cy='107.7' r='15' fill='#D9D2F0'/><text x='274.0' y='112.7' text-anchor='middle' font-size='15' font-weight='700' fill='#5F5979'>4</text><circle cx='319.3' cy='169.4' r='15' fill='#D9D2F0'/><text x='319.3' y='174.4' text-anchor='middle' font-size='15' font-weight='700' fill='#5F5979'>5</text><circle cx='224.0' cy='340.0' r='30' fill='#D9D2F0'/><text x='224.0' y='345.0' text-anchor='middle' font-size='15' font-weight='700' fill='#5F5979'>6</text></svg></div></div>
+<div class='right'><div class='stat' style='background:var(--mint)'><span class='k'>This tap</span><span class='big num'>386<small>ms</small></span></div>
+<div class='stat' style='background:var(--peach)'><span class='k'>In a row</span><span class='big num'>5</span></div>
+<div class='stat' style='background:var(--lilac)'><span class='k'>Misses</span><span class='big num'>0</span></div></div></main></div>
+<h2>Rules</h2>
+<div class='rules'><div><b>Calm while a coin glows</b><p>Big moves only between targets, so reaction time stays fair. While a coin glows he only glances at it.</p></div>
+<div><b>Never sad, never scolds</b><p>A miss gets a tilt and a thumbs up. A low mood gets a hug and a warm glow, never a hop.</p></div>
+<div><b>Gentle motion</b><p>200 to 800 ms moves, no flashing, small sizes. Everything stops with reduced motion.</p></div></div>
+</body></html>
