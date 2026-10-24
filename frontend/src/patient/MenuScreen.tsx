@@ -50,7 +50,7 @@ export function MenuScreen({ name, sessionTime, streak, mode, onPick, onStart, o
             >
               <span
                 className={`grid size-12 place-items-center rounded-2xl font-bold ${
-                  id === mode ? 'bg-accent text-white' : 'bg-lilac text-accent'
+                  id === mode ? 'bg-accent text-white' : 'bg-lilac text-accent-ink'
                 }`}
               >
                 {i + 1}

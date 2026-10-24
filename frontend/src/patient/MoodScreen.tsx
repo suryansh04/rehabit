@@ -53,7 +53,7 @@ export function MoodScreen({ onDone }: { onDone: () => void }) {
                     on ? 'border-accent shadow-soft' : 'border-transparent'
                   }`}
                 >
-                  <b className={`grid size-10 place-items-center rounded-full ${on ? 'bg-accent text-white' : 'bg-lilac text-accent'}`}>
+                  <b className={`grid size-10 place-items-center rounded-full ${on ? 'bg-accent text-white' : 'bg-lilac text-accent-ink'}`}>
                     {score}
                   </b>
                   {label}

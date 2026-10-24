@@ -73,6 +73,7 @@ def public_config():
     return {
         "patient_name": settings.patient_name,
         "session_time": settings.session_time,
+        "reminder_minutes_before": settings.reminder_minutes_before,
         "org_id": settings.sarvam_org_id,
         "workspace_id": settings.sarvam_workspace_id,
         "companion_app_id": settings.sarvam_companion_app_id,

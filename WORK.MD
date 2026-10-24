@@ -55,7 +55,7 @@ If time is short, cut from the bottom.
 | `POST /api/mood`     | Save a mood score                                                                            |
 | `GET /api/sessions`  | List sessions for the dashboard, newest first. Each session has its `mood` (or null)        |
 | `POST /api/call-now` | Start the reminder call now (demo button)                                                    |
-| `GET /api/config`    | Public settings for the frontend: patient name, session time, Sarvam org, workspace and companion app ids. No keys |
+| `GET /api/config`    | Public settings for the frontend: patient name, session time, reminder minutes, Sarvam org, workspace and companion app ids. No keys |
 | `GET /api/sarvam/*`  | Companion proxy. Forwards to `https://apps.sarvam.ai/api/app-runtime/*` and adds `X-API-Key` |
 
 ### Database
