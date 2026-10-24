@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="design/logo/rehabit-logo.png" alt="Rehabit" width="520">
+  <img src="assets/logo/rehabit-logo.png" alt="Rehabit" width="520">
 </p>
 
 <p align="center"><b>Recovery is a habit. We make it stick.</b></p>
