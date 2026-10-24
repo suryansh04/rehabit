@@ -5,8 +5,10 @@ import { Pill, TopBar } from '../shared/TopBar'
 import { saveMood } from '../shared/api'
 import { FINGER_PADS, TAPS_PER_GAME } from '../shared/config'
 import { useDevice, useDeviceEvents } from '../shared/device'
+import { Ankur } from './ankur/Ankur'
 
 const MOODS = ['Very low', 'Low', 'Okay', 'Good', 'Very good']
+const LOW_MOOD_MAX = 2
 const THANKS_MS = 1500
 
 export function MoodScreen({ onDone }: { onDone: () => void }) {
@@ -39,6 +41,7 @@ export function MoodScreen({ onDone }: { onDone: () => void }) {
           <HandBoard hand={hand} size={320} live={picked} dimPalm />
         </Ring>
         <div className="max-w-md">
+          <Ankur state={picked === null ? 'think' : picked <= LOW_MOOD_MAX ? 'comfort' : 'happy'} size={120} />
           <h1 className="text-[34px] font-bold tracking-tight">{picked ? 'Thank you for telling us.' : 'How do you feel now?'}</h1>
           <p className="text-muted">Tap one fingertip coin. 1 is very low, 5 is very good.</p>
           <div className="mt-5 flex flex-col gap-2.5">

@@ -40,6 +40,7 @@ An AI phone call reminds the patient just before each daily session.
 4. **Reminder call**: a few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up.
 5. **WhatsApp**: daily summary and alerts to family. Alerts: missed session (no game within 1 hour after session time) and low mood.
 6. **Therapist dashboard**: progress per mode, mood vs reaction time, session history.
+7. **Ankur, the mascot**: a small sprout in a clay pot. He speaks the coach lines in a round cloud thought bubble (thinking dots first, then the line). He reacts to game events: watching while a coin glows, happy on a good tap, cheer on a streak, encourage on a miss (never sad), push on the last 5 taps, celebrate (a flower blooms) when a game ends, comfort on a low mood. Patient screens only, not the dashboard. Design: `design/round-05-mascot/`.
 
 ## Hardware
 

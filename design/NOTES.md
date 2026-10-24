@@ -21,6 +21,14 @@ The source is `design/hand/hand.py`. It becomes `frontend/src/shared/HandBoard.t
 - Dashboard: Bento with a sidebar (Overview, Sessions, Games, Mood, Calls, Settings).
 - Mockups: `round-04-play/`.
 
+## Mascot (chosen in round 5)
+
+- Ankur, a sprout in a terracotta pot, with a fixed 4-leaf crown. A flower blooms only in Celebrate.
+- States: idle, watch, happy, cheer, encourage, push, listen, speak, celebrate, comfort, think, sleepy.
+- The coach line sits in a round cloud thought bubble (10 puffs on an oval, 2 trail circles), with thinking dots first.
+- The streak pill stays. Ankur does not grow with the streak.
+- Source: `round-05-mascot/ankur.py`. It becomes `frontend/src/patient/ankur/`.
+
 ## Open
 
 - Hindi on the Play screen: not decided. The coach and chat lines are already Hinglish.

@@ -44,6 +44,7 @@ If time is short, cut from the bottom.
 11. **WhatsApp events.** Write `send_whatsapp(event, data)`. It sends the 3 events through the chosen provider (OmniDimension or Meta Cloud API). Start with a stub that prints the message.
 12. **Dashboard charts.** Progress per mode. Mood vs reaction time.
 13. **Demo data.** Fill the database with 7 days of fake sessions for the dashboard.
+14. **Ankur mascot.** One SVG component with CSS animation states, and a cloud thought bubble for the coach lines. He stays calm while a coin glows, so reaction times stay fair. All motion stops with reduced motion.
 
 ### API endpoints
 
