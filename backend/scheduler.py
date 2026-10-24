@@ -29,7 +29,9 @@ def daily_summary(today: date) -> dict:
     week_ago = db.sessions_on(today - timedelta(days=TREND_DAYS))
 
     def avg_reaction(rows):
-        return round(sum(s["avg_reaction_ms"] for s in rows) / len(rows)) if rows else None
+        # a game with no good taps has no reaction time
+        times = [s["avg_reaction_ms"] for s in rows if s["avg_reaction_ms"] > 0]
+        return round(sum(times) / len(times)) if times else None
 
     return {
         "sessions": len(sessions),
@@ -41,11 +43,7 @@ def daily_summary(today: date) -> dict:
 
 
 async def reminder_job() -> None:
-    try:
-        await start_reminder_call()
-    except Exception as error:
-        # a failed call must not stop the other jobs; the demo has a recorded call as backup
-        print(f"[call] reminder call failed: {error}", flush=True)
+    await start_reminder_call()
 
 
 def missed_job() -> None:
@@ -76,7 +74,11 @@ async def run_scheduler() -> None:
         for name, (due, job) in jobs.items():
             if done.get(name) != date.today() and now >= due():
                 done[name] = date.today()
-                result = job()
-                if asyncio.iscoroutine(result):
-                    await result
+                try:
+                    result = job()
+                    if asyncio.iscoroutine(result):
+                        await result
+                except Exception as error:
+                    # one failed job must not stop the others; the demo has a recorded call as backup
+                    print(f"[scheduler] {name} job failed: {error}", flush=True)
         await asyncio.sleep(CHECK_EVERY_S)
