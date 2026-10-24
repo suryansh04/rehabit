@@ -39,8 +39,8 @@ If time is short, cut from the bottom.
 6. **Other game modes.** Finger isolation, Memory sequence, Endurance.
 7. **Left and right hand mode.** Read the `hand` field in each message.
 8. **Voice coach.** Make the 5 audio clips on the ElevenLabs website before the demo (a cute, cheerful voice; Sarvam voices sounded too mature). Save them as `frontend/public/clips/<id>.mp3`. Play a clip on events, such as streaks and the last 5 taps.
-9. **AI companion (Mitra).** An ElevenLabs agent with `@elevenlabs/react` in the browser (voice "Viraj", Hindi, 180 second max). The patient clicks "Start session" once first (browsers need a click for audio and microphone). Then a 2 second palm hold starts the talk. Never put the ElevenLabs key in the browser. The backend gives the browser a short-lived token. Save the mood score with `POST /api/mood`.
-10. **Reminder call.** A timer in the backend. At `REMINDER_MINUTES_BEFORE` minutes before `SESSION_TIME`, call `PATIENT_PHONE` with the Sarvam Instant Outbound API. The call says a game session is coming up. Add a "Call now" button on the dashboard for the demo. This needs a phone number and a connection in the Sarvam workspace. Set this up early. If it fails, play a recorded call in the demo.
+9. **AI companion (Yash).** An ElevenLabs agent with `@elevenlabs/react` in the browser (voice "Viraj", Hindi, 180 second max). The patient clicks "Start session" once first (browsers need a click for audio and microphone). Then a 2 second palm hold starts the talk. Never put the ElevenLabs key in the browser. The backend gives the browser a short-lived token. Save the mood score with `POST /api/mood`.
+10. **Reminder call.** A timer in the backend. At `REMINDER_MINUTES_BEFORE` minutes before `SESSION_TIME`, call `PATIENT_PHONE` with the Sarvam Instant Outbound API. The call says a game session is coming up. Send `patient_name` and `session_time` in `agent_variables` (declare both on the agent's Variables tab). Add a "Call now" button on the dashboard for the demo. This needs a phone number and a connection in the Sarvam workspace. Set this up early. If it fails, play a recorded call in the demo.
 11. **WhatsApp events.** Write `send_whatsapp(event, data)`. It sends the 3 events through the chosen provider (OmniDimension or Meta Cloud API). Start with a stub that prints the message.
 12. **Dashboard charts.** Progress per mode. Mood vs reaction time.
 13. **Demo data.** Fill the database with 7 days of fake sessions for the dashboard.
@@ -57,7 +57,7 @@ If time is short, cut from the bottom.
 | `GET /api/sessions`  | List sessions for the dashboard, newest first. Each session has its `mood` (or null)        |
 | `POST /api/call-now` | Start the reminder call now (demo button)                                                    |
 | `GET /api/config`    | Public settings for the frontend: patient name, session time, reminder minutes. No keys |
-| `GET /api/companion/token` | Short-lived ElevenLabs conversation token for Mitra. The backend adds `xi-api-key` |
+| `GET /api/companion/token` | Short-lived ElevenLabs conversation token for Yash. The backend adds `xi-api-key` |
 
 ### Database
 
@@ -300,7 +300,7 @@ Hold. Send this when the palm pad (6) stays touched for 2 seconds:
 1. Show the board. Say what it costs.
 2. A judge plays Classic mode on the real board.
 3. The voice coach speaks Hindi encouragement.
-4. Hold the palm coin. Mitra, the companion, starts. Say how you feel.
+4. Hold the palm coin. Yash, the companion, starts. Say how you feel.
 5. Show the dashboard. Progress and mood chart.
 6. Show a WhatsApp message on a phone.
 7. Press "Call now". The phone rings with the session reminder. Or play a recording of it.
