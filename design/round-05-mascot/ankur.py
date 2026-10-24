@@ -58,7 +58,7 @@ def crown(leaves, flower):
     return f"<g class='crown'>{''.join(parts)}</g>"
 
 
-def ankur(state="idle", eyes="open", mouth="smile", extra="", leaves=2, flower=False, size=160):
+def ankur(state="idle", eyes="open", mouth="smile", extra="", leaves=4, flower=False, size=160):
     ink = G["ink"]
     fx = ""
     if "sparkle" in extra:
@@ -153,8 +153,6 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 .state h3{font-size:17px;margin-top:12px} .state .when{font-size:13px;color:var(--ac);font-weight:700;margin-top:2px} .state p{font-size:13px;color:var(--mu);margin-top:4px;line-height:1.4}
 .tag{position:absolute;top:10px;left:10px;font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--mint);color:#1F6B47}
 .pad{position:absolute;right:16px;top:58px;width:26px;height:26px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 8px rgba(107,78,246,.2)}
-.grow{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:16px}
-.grow .state .pic{background:linear-gradient(180deg,#F3F0FA,#E9F7E5)}
 .mock{margin-top:16px;background:var(--bg);border-radius:32px;border:1px solid var(--ln);overflow:hidden}
 .mock .bar{display:flex;align-items:center;gap:12px;padding:22px 32px}
 .mock main{display:grid;grid-template-columns:1fr 520px 1fr;align-items:center;gap:20px;padding:0 32px 32px}
@@ -202,24 +200,18 @@ def thought(line, loop=True):
 def state_card(sid, name, when, motion, eyes, mouth, extra):
     flower = sid == "celebrate"
     pad = "<span class='pad' title='glowing pad'></span>" if sid == "watch" else ""
-    return (f"<div class='state'><div class='pic'>{pad}{ankur(sid, eyes, mouth, extra, leaves=2, flower=flower, size=150)}</div>"
+    return (f"<div class='state'><div class='pic'>{pad}{ankur(sid, eyes, mouth, extra, flower=flower, size=150)}</div>"
             f"<h3>{name}</h3><div class='when'>{when}</div><p>{motion}</p></div>")
 
 
 def page():
     states = "".join(state_card(*s) for s in STATES)
-    growth = [("Day 1", "First session. A tiny sprout with one leaf.", 1, False),
-              ("Day 3", "Two leaves. The habit is starting.", 2, False),
-              ("Day 5", "Four leaves. Strong and steady.", 4, False),
-              ("Day 7", "A flower with 5 petals, one for each finger.", 4, True)]
-    grow = "".join(f"<div class='state'><div class='pic'>{ankur('idle', 'happy' if fl else 'open', 'big' if fl else 'smile', '', n, fl, 150)}</div>"
-                   f"<h3>{d}</h3><p>{t}</p></div>" for d, t, n, fl in growth)
     palette = "".join(f"<span class='chip'><i style='background:{G[k]}'></i>{label} {G[k]}</span>"
                       for k, label in [("body", "Body"), ("leaf", "Leaf"), ("pot", "Clay pot"), ("cheek", "Cheeks"), ("petal", "Petal"), ("gold", "Sparkle")])
     game = f"""
 <div class='mock'><div class='bar'><span class='logo'>rehabit<i></i></span><span class='pill'><b>Classic</b> · Right hand</span><span class='pill' style='margin-left:auto'>Stop</span></div>
 <main><div class='left'><span style='color:var(--mu)'>Good taps</span><span class='count num'>7<small> / 20</small></span>
-<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', 3, False, 150)}{thought('Bahut badhiya!')}</div></div>
+<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', size=150)}{thought('Bahut badhiya!')}</div></div>
 {ring(7, hand(300), size=520)}
 <div class='right'><div class='stat' style='background:var(--mint)'><span class='k'>This tap</span><span class='big num'>386<small>ms</small></span></div>
 <div class='stat' style='background:var(--peach)'><span class='k'>In a row</span><span class='big num'>5</span></div>
@@ -227,22 +219,20 @@ def page():
     return f"""<!doctype html><html lang='en'><head><meta charset='utf-8'><meta name='viewport' content='width=device-width,initial-scale=1'><title>Ankur design sheet</title>
 <style>{BASE}{PAGE_CSS}{CSS}.pill{{font-size:14px;padding:8px 14px;border-radius:99px;background:var(--sf);border:1px solid var(--ln)}}</style></head><body>
 <h1>Ankur, our little sprout</h1>
-<p class='lead'>Recovery is a habit, and habits grow. Ankur lives in a small clay pot and grows a new leaf on each day of the streak. He cheers between taps, stays calm while a coin glows, and never looks sad.</p>
-<section class='hero'><div class='stage'>{ankur('idle', 'open', 'smile', '', 2, False, 230)}</div>
+<p class='lead'>Recovery is a habit, and habits grow. Ankur lives in a small clay pot with a full crown of leaves. He cheers between taps, stays calm while a coin glows, blooms when a game is done, and never looks sad.</p>
+<section class='hero'><div class='stage'>{ankur('idle', 'open', 'smile', '', size=230)}</div>
 <div><h2 style='margin:0'>Character</h2><p class='lead'>A chubby round sprout with two leaf arms and a leaf crown. Big kind eyes, peach cheeks, a terracotta pot with a white dotted rangoli band. Warm and gentle for adults, not a kids' cartoon.</p>
 <div class='chips'>{palette}</div>
 <div class='facts'><div><b>Name</b><span class='k'>Ankur means sprout</span></div><div><b>Voice</b><span class='k'>The coach lines, Hinglish</span></div><div><b>Sizes</b><span class='k'>150 game · 96 menu · 72 cards</span></div></div></div></section>
 <h2>States</h2><p class='lead'>Each state is driven by events the app already has. All motions are CSS on a single SVG, and all stop when the device asks for reduced motion.</p>
 <div class='grid'>{states}</div>
-<h2>Growth over the week</h2><p class='lead'>The streak becomes something you can see. A missed day does not hurt Ankur, he just does not grow that day.</p>
-<div class='grow'>{grow}</div>
 <h2>In the game</h2><p class='lead'>Ankur takes the coach bubble's place in the left column, far from the hand, so he never covers the glowing coin.</p>
 {game}
 <h2>Thought bubble</h2><p class='lead'>Ankur's lines sit in a soft cloud bubble that trails down to his head. It shows thinking dots for a moment, then the line pops in. The voice clip plays at the same time as the line.</p>
 <div class='bubbles'>
-<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', 3, False, 130)}{thought('Bahut badhiya! Aise hi karte raho.')}</div>
-<div class='speech'>{ankur('encourage', 'kind', 'soft', '', 3, False, 130)}{thought('Koi baat nahi, agla try karo.')}</div>
-<div class='speech'>{ankur('push', 'focus', 'smile', '', 3, False, 130)}{thought('Bas 5 aur! Aap kar sakte ho.')}</div>
+<div class='speech'>{ankur('cheer', 'happy', 'big', 'sparkle', size=130)}{thought('Bahut badhiya! Aise hi karte raho.')}</div>
+<div class='speech'>{ankur('encourage', 'kind', 'soft', '', size=130)}{thought('Koi baat nahi, agla try karo.')}</div>
+<div class='speech'>{ankur('push', 'focus', 'smile', '', size=130)}{thought('Bas 5 aur! Aap kar sakte ho.')}</div>
 </div>
 <h2>Rules</h2>
 <div class='rules'><div><b>Calm while a coin glows</b><p>Big moves only between targets, so reaction time stays fair. While a coin glows he only glances at it.</p></div>
