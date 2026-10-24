@@ -1,5 +1,6 @@
 # Secrets
 .env
+firmware/include/secrets.h
 
 # Python
 __pycache__/
