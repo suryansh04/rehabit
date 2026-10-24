@@ -47,28 +47,36 @@ If time is short, cut from the bottom.
 
 ### API endpoints
 
-| Endpoint            | Use                             |
-| ------------------- | ------------------------------- |
-| `WS /ws/device`     | Taps from the ESP32             |
-| `WS /ws/game`       | Taps to the frontend            |
-| `POST /api/session` | Save a game session             |
-| `POST /api/mood`    | Save a mood score               |
-| `GET /api/sessions` | List sessions for the dashboard |
-| `POST /api/call-now` | Start the reminder call now (demo button) |
-| `GET /api/sarvam/*` | Companion proxy. Forwards to `https://apps.sarvam.ai/api/app-runtime/*` and adds `X-API-Key` |
+| Endpoint             | Use                                                                                          |
+| -------------------- | -------------------------------------------------------------------------------------------- |
+| `WS /ws/device`      | Taps from the ESP32                                                                          |
+| `WS /ws/game`        | Taps to the frontend                                                                         |
+| `POST /api/session`  | Save a game session                                                                          |
+| `POST /api/mood`     | Save a mood score                                                                            |
+| `GET /api/sessions`  | List sessions for the dashboard, newest first. Each session has its `mood` (or null)        |
+| `POST /api/call-now` | Start the reminder call now (demo button)                                                    |
+| `GET /api/config`    | Public settings for the frontend: patient name, session time, Sarvam org, workspace and companion app ids. No keys |
+| `GET /api/sarvam/*`  | Companion proxy. Forwards to `https://apps.sarvam.ai/api/app-runtime/*` and adds `X-API-Key` |
 
 ### Database
 
-- `sessions`: id, mode, hand, started_at, duration_s, taps, correct, avg_reaction_ms, accuracy.
-- `moods`: id, session_id, score (1 to 5), created_at. The patient taps pad 1 to 5 after the companion talk.
+- `sessions`: id, mode, hand, started_at, duration_s, taps, correct, avg_reaction_ms, accuracy, score.
+  - `score` is the main number for the mode: accuracy % (Classic, Finger isolation), longest sequence in pads (Memory), correct taps (Endurance).
+- `moods`: id, session_id, score (1 to 5), created_at. The patient taps pad 1 to 5 after the companion talk. The backend links the mood to the latest session (null if there is none).
+
+### Frontend notes
+
+- Charts are small SVG components (sparkline, bars, scatter). No chart library.
+- Font: Plus Jakarta Sans (`@fontsource`). Icons: `lucide-react`. Design: `design/NOTES.md` and `design/round-04-play/`.
+- Keys 1 to 6 on the keyboard act as pads, and holding 6 for 2 seconds acts as a palm hold. This works without the board.
 
 ### Events for Person 4
 
-| Event            | When                                              |
-| ---------------- | ------------------------------------------------- |
-| `daily_summary`  | Once each day. Taps, reaction time trend, streak. |
+| Event            | When                                                                               |
+| ---------------- | ---------------------------------------------------------------------------------- |
+| `daily_summary`  | Once each day. Taps, reaction time trend, streak.                                  |
 | `missed_session` | No session saved within `MISSED_AFTER_MINUTES` after `SESSION_TIME`. Once per day. |
-| `low_mood`       | Mood score is 2 or lower.                         |
+| `low_mood`       | Mood score is 2 or lower.                                                          |
 
 ---
 

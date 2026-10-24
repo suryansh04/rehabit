@@ -1,0 +1,119 @@
+{
+  "schemaVersion": 1,
+  "lang": "en",
+  "project": "Rehabit",
+  "round": "Style cards 02",
+  "brief": "Patient Play screen (left) and therapist dashboard tiles (right) in one view. Compare fonts, colors and controls.",
+  "candidates": [
+    {
+      "id": "bento",
+      "name": "Soft Bento",
+      "concept": "The Dribbble health-app look done well: pastel tiles in a bento grid, one confident violet, big friendly numbers.",
+      "typography": "Plus Jakarta Sans 700 display, Plus Jakarta Sans 500 body",
+      "palette": [
+        "#F3F0FA",
+        "#FFFFFF",
+        "#1B1530",
+        "#6B4EF6",
+        "#DDF5E8",
+        "#FFE7D9"
+      ],
+      "traits": [
+        "Lavender base",
+        "Bento tiles in mint and peach",
+        "Pill buttons",
+        "28px corners"
+      ],
+      "kind": "html",
+      "source": "bento.html"
+    },
+    {
+      "id": "lime",
+      "name": "Ink & Lime",
+      "concept": "A sports-tracker energy for recovery: near-black ink, one electric lime, chunky grotesque numbers that feel like a scoreboard.",
+      "typography": "Bricolage Grotesque 800 display, Inter 400 body",
+      "palette": [
+        "#0E1114",
+        "#171B20",
+        "#F1F3EE",
+        "#C6F45B",
+        "#1E2A1A",
+        "#22262E"
+      ],
+      "traits": [
+        "Dark ink surface",
+        "Lime only on the live pad",
+        "Grotesque display type",
+        "Scoreboard numbers"
+      ],
+      "kind": "html",
+      "source": "lime.html"
+    },
+    {
+      "id": "warm",
+      "name": "Warm Care",
+      "concept": "Human and hopeful, like a good clinic brochure: a soft serif for headlines, cream paper, deep green and a terracotta glow.",
+      "typography": "Fraunces 500 display, DM Sans 400 body",
+      "palette": [
+        "#FAF6F0",
+        "#FFFFFF",
+        "#1F3B31",
+        "#C2522C",
+        "#E5EFE8",
+        "#FBE6DA"
+      ],
+      "traits": [
+        "Soft serif headlines",
+        "Cream and deep green",
+        "Terracotta live pad",
+        "Editorial calm"
+      ],
+      "kind": "html",
+      "source": "warm.html"
+    },
+    {
+      "id": "clear",
+      "name": "Clear Sight",
+      "concept": "Built for older eyes first: a typeface made for low vision, sky-calm blues, big targets and very clear states.",
+      "typography": "Sora 600 display, Atkinson Hyperlegible 400 body",
+      "palette": [
+        "#EEF4FA",
+        "#FFFFFF",
+        "#0F2235",
+        "#0B7A85",
+        "#DDF1F2",
+        "#FFF1D6"
+      ],
+      "traits": [
+        "Atkinson Hyperlegible body",
+        "Sky blue and teal",
+        "Extra large targets",
+        "Strong contrast"
+      ],
+      "kind": "html",
+      "source": "clear.html"
+    },
+    {
+      "id": "baloo",
+      "name": "Ghar Friendly",
+      "concept": "Warm and playful for an Indian home: rounded Baloo letters that also write Hindi, coral and teal, toy-like soft pads.",
+      "typography": "Baloo 2 700 display, DM Sans 400 body",
+      "palette": [
+        "#F1F8F6",
+        "#FFFFFF",
+        "#13332E",
+        "#FF6B57",
+        "#FFE9E4",
+        "#E2F1EC"
+      ],
+      "traits": [
+        "Rounded Baloo 2, Hindi ready",
+        "Coral live pad",
+        "Teal calm base",
+        "Soft toy feel"
+      ],
+      "kind": "html",
+      "source": "baloo.html"
+    }
+  ]
+}
