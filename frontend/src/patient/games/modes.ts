@@ -20,7 +20,8 @@ export const MODES: Record<ModeId, Mode> = {
 
 export const MODE_ORDER: ModeId[] = ['classic', 'finger', 'memory', 'endurance']
 
-export type StatView = { label: string; value: string | number; unit?: string }
+// since: a clock is running from this moment, so the tile counts up live in ms
+export type StatView = { label: string; value: string | number; unit?: string; since?: number }
 
 // What every game hands to the shared game screen.
 export type GameModel = {

@@ -3,6 +3,7 @@ import { FEEDBACK_MS, MEMORY_MAX_MISTAKES, MEMORY_START_LENGTH, MEMORY_STEP_MS }
 import type { Flash } from '../../shared/HandBoard'
 import { useDeviceEvents } from '../../shared/device'
 import type { Hand } from '../../shared/types'
+import { playHitSound } from '../tapSound'
 import { MODES, type FinishHandler, type GameModel } from './modes'
 import { buildResult, END_DELAY_MS, pickPad, START_DELAY_MS, useGameKit } from './useGameKit'
 
@@ -92,6 +93,7 @@ export function useMemoryGame(hand: Hand, onFinish: FinishHandler): GameModel {
       return later(() => play(g.sequence), NEXT_ROUND_MS)
     }
 
+    playHitSound()
     g.good += 1
     g.reactions.push(g.lastMs)
     g.step += 1
@@ -107,6 +109,8 @@ export function useMemoryGame(hand: Hand, onFinish: FinishHandler): GameModel {
     bump()
   })
 
+  const yourTurn = !g.showing && !g.done && g.sequence.length > 0
+
   return {
     live: g.live,
     flash: g.flash,
@@ -115,7 +119,12 @@ export function useMemoryGame(hand: Hand, onFinish: FinishHandler): GameModel {
     stats: [
       { label: 'Best order', value: g.best, unit: 'pads' },
       { label: 'Mistakes left', value: MEMORY_MAX_MISTAKES - g.mistakes },
-      { label: 'This tap', value: g.lastMs ?? '-', unit: g.lastMs ? 'ms' : undefined },
+      {
+        label: 'This tap',
+        value: g.lastMs ?? '-',
+        unit: g.lastMs ? 'ms' : undefined,
+        since: yourTurn ? g.lastPressAt : undefined,
+      },
     ],
     cue,
   }

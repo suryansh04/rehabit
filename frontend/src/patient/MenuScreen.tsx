@@ -5,10 +5,13 @@ import { PALM_PAD, TAPS_PER_GAME } from '../shared/config'
 import { useDevice, useDeviceEvents } from '../shared/device'
 import type { ModeId } from '../shared/types'
 import { Button } from '../shared/ui'
+import { Ankur } from './ankur/Ankur'
+import { ThoughtCloud } from './ankur/ThoughtCloud'
 import { MODE_ORDER, MODES } from './games/modes'
 
 const RING_SIZE = 500
 const HAND_SIZE = 290
+const ANKUR_SIZE = 120
 
 type Props = {
   name: string
@@ -61,13 +64,6 @@ export function MenuScreen({ name, sessionTime, streak, mode, onPick, onStart, o
               </span>
             </button>
           ))}
-          <button onClick={onTalk} className="mt-auto flex items-center gap-3.5 rounded-3xl bg-peach p-5 text-left">
-            <span className="grid size-12 place-items-center rounded-full bg-surface font-bold">{PALM_PAD}</span>
-            <span>
-              <b className="block">Want to talk?</b>
-              <span className="text-[15px] text-muted">Hold your palm on coin {PALM_PAD} for 2 seconds</span>
-            </span>
-          </button>
         </aside>
         <section className="grid grid-rows-[auto_1fr_auto] rounded-card bg-surface px-8 py-7 shadow-soft">
           <div className="flex items-center gap-3">
@@ -81,10 +77,23 @@ export function MenuScreen({ name, sessionTime, streak, mode, onPick, onStart, o
           </div>
           <div className="flex items-center gap-3">
             <Button variant="primary" onClick={onStart}>Start session</Button>
-            <span className="ml-auto text-[15px] text-muted">Put your {hand} hand on the board</span>
+            <span className="text-[15px] text-muted">Put your {hand} hand on the board</span>
           </div>
         </section>
       </main>
+      {/* Ankur is the way into a talk with Yash: tap him, or hold the palm coin */}
+      <button
+        onClick={onTalk}
+        aria-label="Talk with Yash"
+        className="fixed right-8 bottom-6 flex items-end gap-1 transition hover:scale-[1.03] active:scale-[.97]"
+      >
+        <span className="mb-16">
+          <ThoughtCloud text={`Want to talk?
+Hold coin ${PALM_PAD}
+or tap me!`} tail="right" />
+        </span>
+        <Ankur state="happy" size={ANKUR_SIZE} />
+      </button>
     </div>
   )
 }

@@ -1,10 +1,8 @@
 import { useState } from 'react'
-import { HandBoard } from '../shared/HandBoard'
-import { Ring } from '../shared/Ring'
 import { Pill, TopBar } from '../shared/TopBar'
 import { saveMood } from '../shared/api'
-import { FINGER_PADS, TAPS_PER_GAME } from '../shared/config'
-import { useDevice, useDeviceEvents } from '../shared/device'
+import { FINGER_PADS } from '../shared/config'
+import { useDeviceEvents } from '../shared/device'
 import { Ankur } from './ankur/Ankur'
 
 const MOODS = ['Very low', 'Low', 'Okay', 'Good', 'Very good']
@@ -12,7 +10,6 @@ const LOW_MOOD_MAX = 2
 const THANKS_MS = 1500
 
 export function MoodScreen({ onDone }: { onDone: () => void }) {
-  const { hand } = useDevice()
   const [picked, setPicked] = useState<number | null>(null)
   const [error, setError] = useState<string | null>(null)
 
@@ -36,15 +33,12 @@ export function MoodScreen({ onDone }: { onDone: () => void }) {
   return (
     <div className="flex min-h-screen flex-col gap-6 px-10 py-8">
       <TopBar left={<Pill><b>Talk time</b></Pill>} />
-      <main className="grid flex-1 grid-cols-[auto_1fr] items-center gap-12">
-        <Ring lit={0} total={TAPS_PER_GAME} size={560} showTicks={false}>
-          <HandBoard hand={hand} size={320} live={picked} dimPalm />
-        </Ring>
-        <div className="max-w-md">
+      <main className="grid flex-1 place-items-center">
+        <div className="flex w-full max-w-lg flex-col items-center text-center">
           <Ankur state={picked === null ? 'think' : picked <= LOW_MOOD_MAX ? 'comfort' : 'happy'} size={120} />
           <h1 className="text-[34px] font-bold tracking-tight">{picked ? 'Thank you for telling us.' : 'How do you feel now?'}</h1>
           <p className="text-muted">Tap one fingertip coin. 1 is very low, 5 is very good.</p>
-          <div className="mt-5 flex flex-col gap-2.5">
+          <div className="mt-6 flex w-full flex-col gap-2.5">
             {MOODS.map((label, i) => {
               const score = i + 1
               const on = picked === score

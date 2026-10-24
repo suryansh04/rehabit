@@ -8,10 +8,13 @@ const puffs = Array.from({ length: PUFFS }, (_, i) => {
   return { left: `${50 + 47 * Math.cos(a)}%`, top: `${50 + 44 * Math.sin(a)}%`, width: size, height: size }
 })
 
+type CloudProps = { text: string | null; lineKey?: string | number; tail?: 'left' | 'right' }
+
 // text null shows thinking dots. A new lineKey replays the pop-in for the next line.
-export function ThoughtCloud({ text, lineKey }: { text: string | null; lineKey?: string | number }) {
+// tail is the side of the small trail puffs, towards Ankur.
+export function ThoughtCloud({ text, lineKey, tail = 'left' }: CloudProps) {
   return (
-    <div className="ank-cloud" role="status">
+    <div className={`ank-cloud ank-tail-${tail}`} role="status">
       {puffs.map((style, i) => (
         <span key={i} className="ank-puff" style={style} />
       ))}

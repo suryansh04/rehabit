@@ -84,11 +84,13 @@
 .ank-puff { z-index: -1; translate: -50% -50%; }
 .ank-trail-1 { width: 18px; height: 18px; left: -2px; bottom: -14px; }
 .ank-trail-2 { width: 10px; height: 10px; left: -18px; bottom: -30px; }
+.ank-tail-right .ank-trail-1 { left: auto; right: -2px; }
+.ank-tail-right .ank-trail-2 { left: auto; right: -18px; }
 .ank-dots { display: flex; gap: 5px; }
 .ank-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-muted); animation: ank-dot 1s ease-in-out infinite; }
 .ank-dots i:nth-child(2) { animation-delay: 0.15s; }
 .ank-dots i:nth-child(3) { animation-delay: 0.3s; }
-.ank-line { animation: ank-line-in 0.3s ease-out both; }
+.ank-line { white-space: pre-line; animation: ank-line-in 0.3s ease-out both; }
 @keyframes ank-pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 @keyframes ank-dot { 0%, 100% { transform: translateY(0); opacity: 0.35; } 50% { transform: translateY(-4px); opacity: 0.9; } }
 @keyframes ank-line-in { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }

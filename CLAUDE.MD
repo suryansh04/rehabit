@@ -22,7 +22,7 @@ An AI phone call reminds the patient just before each daily session.
 
 ## Features
 
-1. **Game modes**
+1. **Game modes**. While a coin glows, "This tap" counts up live in ms and stops on the tap. Average reaction is the mean of good taps only. Accuracy is good taps / (good taps + misses); a wrong coin and a timed-out coin are both misses. A correct tap plays a soft two-note chime (made with Web Audio, no file); a miss is silent.
    - Classic: tap the pad that glows. One game is 20 taps. No tap in 3 seconds is a miss, then the next pad glows.
    - Finger isolation: same as Classic, with fingertip pads 1 to 5 only. No palm.
    - Memory sequence: pads glow in order. The patient repeats the order. Start with 3 pads. Each correct round adds 1 pad. The game stops after 2 mistakes.
@@ -40,7 +40,7 @@ An AI phone call reminds the patient just before each daily session.
 4. **Reminder call (Ishu)**: Ishu is a cheerful male Sarvam voice ("Shubh"), a different character from Yash. A few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up. The backend sends `patient_name` and `session_time` as agent variables, so the agent can say them.
 5. **WhatsApp**: daily summary and alerts to family. Alerts: missed session (no game within 1 hour after session time) and low mood.
 6. **Therapist dashboard**: progress per mode, mood vs reaction time, session history.
-7. **Ankur, the mascot**: a small sprout in a clay pot. He speaks the coach lines in a round cloud thought bubble (thinking dots first, then the line). He reacts to game events: watching while a coin glows, happy on a good tap, cheer on a streak, encourage on a miss (never sad), push on the last 5 taps, celebrate (a flower blooms) when a game ends, comfort on a low mood. Patient screens only, not the dashboard. Design: `design/round-05-mascot/`.
+7. **Ankur, the mascot**: a small sprout in a clay pot. He speaks the coach lines in a round cloud thought bubble (thinking dots first, then the line). He reacts to game events: watching while a coin glows, happy on a good tap, cheer on a streak, encourage on a miss (never sad), push on the last 5 taps, celebrate (a flower blooms) when a game ends, comfort on a low mood. On the menu he sits at the bottom right as the talk button: his cloud says to hold coin 6 or tap him, and a tap or a palm hold starts the talk with Yash. Patient screens only, not the dashboard. Design: `design/round-05-mascot/`.
 
 ## Hardware
 
@@ -58,6 +58,7 @@ An AI phone call reminds the patient just before each daily session.
 | 6 | Palm | 33 |
 
 - Hand switch: GPIO25, `INPUT_PULLUP`. LOW is left hand. HIGH is right hand.
+- Our board is a left hand. Wire GPIO25 to GND so the board sends `left`. The app also starts on the left hand until the first message arrives.
 - Do not use GPIO 0, 2, 12, 15. These pins control boot.
 - `touchRead()` values go DOWN when touched on this chip.
 - Calibrate each pad at boot. Do not touch pads during boot.
@@ -99,13 +100,13 @@ rehabit/
 Tap message format:
 
 ```json
-{"type": "tap", "pad": 3, "hand": "right", "ms": 123456}
+{"type": "tap", "pad": 3, "hand": "left", "ms": 123456}
 ```
 
 Hold message. The ESP32 sends it when the palm pad (6) stays touched for 2 seconds. This starts the AI companion:
 
 ```json
-{"type": "hold", "pad": 6, "hand": "right", "ms": 123456}
+{"type": "hold", "pad": 6, "hand": "left", "ms": 123456}
 ```
 
 ## Commands
@@ -162,7 +163,7 @@ We use two voice agents, each with its own prompt. The companion (Yash) is an El
 
 The reminder call needs a phone number and a telephony connection in the Sarvam workspace. The browser companion does not need them.
 
-The ElevenLabs agent has authentication on, a 180 second max duration and the End call tool.
+The ElevenLabs agent has authentication on, a 180 second max duration and the End call tool. To ignore room noise it uses background voice detection, Hindi and English ignore terms (short sounds like "haan" do not interrupt Yash), and no interruptions of the first message.
 
 ## Rules for Claude
 
