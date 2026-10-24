@@ -38,12 +38,13 @@ If time is short, cut from the bottom.
 5. **Save sessions.** `POST /api/session`. Then a basic dashboard that lists sessions.
 6. **Other game modes.** Finger isolation, Memory sequence, Endurance.
 7. **Left and right hand mode.** Read the `hand` field in each message.
-8. **Voice coach.** Make audio clips with Sarvam TTS before the demo. Play a clip on events, such as streaks and the last 5 taps.
+8. **Voice coach.** Make the 5 audio clips on the ElevenLabs website before the demo (a cute, cheerful voice; Sarvam voices sounded too mature). Save them as `frontend/public/clips/<id>.mp3`. Play a clip on events, such as streaks and the last 5 taps.
 9. **AI companion.** Sarvam web SDK in the browser. The patient clicks "Start session" once first (browsers need a click for audio and microphone). Then a 2 second palm hold starts the talk. Never put the Sarvam key in the browser. Use a backend proxy. Save the mood score with `POST /api/mood`.
 10. **Reminder call.** A timer in the backend. At `REMINDER_MINUTES_BEFORE` minutes before `SESSION_TIME`, call `PATIENT_PHONE` with the Sarvam Instant Outbound API. The call says a game session is coming up. Add a "Call now" button on the dashboard for the demo. This needs a phone number and a connection in the Sarvam workspace. Set this up early. If it fails, play a recorded call in the demo.
 11. **WhatsApp events.** Write `send_whatsapp(event, data)`. It sends the 3 events through the chosen provider (OmniDimension or Meta Cloud API). Start with a stub that prints the message.
 12. **Dashboard charts.** Progress per mode. Mood vs reaction time.
 13. **Demo data.** Fill the database with 7 days of fake sessions for the dashboard.
+14. **Ankur mascot.** One SVG component with CSS animation states, and a cloud thought bubble for the coach lines. He stays calm while a coin glows, so reaction times stay fair. All motion stops with reduced motion.
 
 ### API endpoints
 
@@ -55,7 +56,7 @@ If time is short, cut from the bottom.
 | `POST /api/mood`     | Save a mood score                                                                            |
 | `GET /api/sessions`  | List sessions for the dashboard, newest first. Each session has its `mood` (or null)        |
 | `POST /api/call-now` | Start the reminder call now (demo button)                                                    |
-| `GET /api/config`    | Public settings for the frontend: patient name, session time, Sarvam org, workspace and companion app ids. No keys |
+| `GET /api/config`    | Public settings for the frontend: patient name, session time, reminder minutes, Sarvam org, workspace and companion app ids. No keys |
 | `GET /api/sarvam/*`  | Companion proxy. Forwards to `https://apps.sarvam.ai/api/app-runtime/*` and adds `X-API-Key` |
 
 ### Database
@@ -66,6 +67,7 @@ If time is short, cut from the bottom.
 
 ### Frontend notes
 
+- The Vite dev server proxies `/api` and `/ws` to the backend on port 8000. The browser only talks to port 5173, so one ngrok tunnel to 5173 covers the page, the API and the socket.
 - Charts are small SVG components (sparkline, bars, scatter). No chart library.
 - Font: Plus Jakarta Sans (`@fontsource`). Icons: `lucide-react`. Design: `design/NOTES.md` and `design/round-04-play/`.
 - Keys 1 to 6 on the keyboard act as pads, and holding 6 for 2 seconds acts as a palm hold. This works without the board.

@@ -1,0 +1,98 @@
+.ankur { overflow: visible; }
+.ank-plant, .ank-arm, .ank-crown, .ank-face, .ank-look, .ank-flower, .ank-spark, .ank-glow, .ank-talk, .ank-z {
+  transform-box: fill-box;
+}
+.ank-plant { transform-origin: 50% 100%; }
+.ank-arm-l { transform-origin: 100% 50%; }
+.ank-arm-r { transform-origin: 0% 50%; }
+.ank-crown { transform-origin: 50% 100%; }
+.ank-face, .ank-spark, .ank-glow, .ank-talk { transform-origin: 50% 50%; }
+
+@keyframes ank-bob { 50% { transform: translateY(-4px); } }
+@keyframes ank-blink { 0%, 94%, 100% { transform: scaleY(1); } 97% { transform: scaleY(0.1); } }
+@keyframes ank-look { 0%, 15% { transform: translateX(0); } 35%, 85% { transform: translate(5px, -2px); } 100% { transform: translateX(0); } }
+@keyframes ank-hop {
+  0%, 100% { transform: translateY(0) scale(1); }
+  25% { transform: scale(1.08, 0.9); }
+  55% { transform: translateY(-10px) scale(0.95, 1.06); }
+  80% { transform: scale(1.04, 0.96); }
+}
+@keyframes ank-jump { 0%, 100% { transform: translateY(0); } 40%, 60% { transform: translateY(-22px); } }
+@keyframes ank-up-l { 0%, 100% { transform: rotate(0); } 40%, 60% { transform: rotate(55deg); } }
+@keyframes ank-up-r { 0%, 100% { transform: rotate(0); } 40%, 60% { transform: rotate(-55deg); } }
+@keyframes ank-spark { 0%, 100% { transform: scale(0); opacity: 0; } 40%, 70% { transform: scale(1); opacity: 1; } }
+@keyframes ank-tilt { 0%, 100% { transform: rotate(0); } 30%, 80% { transform: rotate(-7deg); } }
+@keyframes ank-thumb { 0%, 100% { transform: rotate(0); } 30%, 80% { transform: rotate(-70deg); } }
+@keyframes ank-pump-r { 0%, 100% { transform: rotate(0); } 25%, 75% { transform: rotate(-40deg); } 50% { transform: rotate(10deg); } }
+@keyframes ank-pump-l { 0%, 100% { transform: rotate(0); } 25%, 75% { transform: rotate(40deg); } 50% { transform: rotate(-10deg); } }
+@keyframes ank-lean { 50% { transform: rotate(5deg) translateY(2px); } }
+@keyframes ank-talk { 0%, 100% { transform: scaleY(0.4); } 50% { transform: scaleY(1.2); } }
+@keyframes ank-sway { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes ank-bloom { 0% { transform: scale(0); } 60% { transform: scale(1.15); } 100% { transform: scale(1); } }
+@keyframes ank-hug-l { 0%, 100% { transform: rotate(-35deg); } 50% { transform: rotate(-45deg); } }
+@keyframes ank-hug-r { 0%, 100% { transform: rotate(35deg); } 50% { transform: rotate(45deg); } }
+@keyframes ank-glow { 0%, 100% { transform: scale(0.92); opacity: 0.12; } 50% { transform: scale(1.05); opacity: 0.28; } }
+@keyframes ank-droop { 0%, 100% { transform: rotate(18deg) scaleY(0.9); } 50% { transform: rotate(22deg) scaleY(0.86); } }
+@keyframes ank-z { 0% { transform: translate(0, 0); opacity: 0; } 30% { opacity: 1; } 100% { transform: translate(10px, -24px); opacity: 0; } }
+@keyframes ank-chin { 0%, 100% { transform: rotate(-70deg); } 50% { transform: rotate(-78deg); } }
+
+.ank-idle .ank-plant { animation: ank-bob 3s ease-in-out infinite; }
+.ank-idle .ank-face, .ank-watch .ank-face, .ank-listen .ank-face, .ank-speak .ank-face { animation: ank-blink 5s infinite; }
+.ank-watch .ank-look { animation: ank-look 3s ease-in-out infinite; }
+.ank-happy .ank-plant { animation: ank-hop 0.7s ease-out; }
+.ank-cheer .ank-plant { animation: ank-jump 1.6s cubic-bezier(0.3, 0.7, 0.4, 1) infinite; }
+.ank-cheer .ank-arm-l, .ank-celebrate .ank-arm-l { animation: ank-up-l 1.6s ease-in-out infinite; }
+.ank-cheer .ank-arm-r, .ank-celebrate .ank-arm-r { animation: ank-up-r 1.6s ease-in-out infinite; }
+.ank-spark { animation: ank-spark 1.6s ease-out infinite; }
+.ank-encourage .ank-plant { animation: ank-tilt 2.4s ease-in-out infinite; }
+.ank-encourage .ank-arm-r { animation: ank-thumb 2.4s ease-in-out infinite; }
+.ank-push .ank-arm-r { animation: ank-pump-r 0.9s ease-in-out infinite; }
+.ank-push .ank-arm-l { animation: ank-pump-l 0.9s ease-in-out infinite; }
+.ank-listen .ank-plant { animation: ank-lean 2.6s ease-in-out infinite; }
+.ank-speak .ank-talk { animation: ank-talk 0.35s ease-in-out infinite; }
+.ank-speak .ank-crown { animation: ank-sway 2s ease-in-out infinite; }
+.ank-celebrate .ank-plant { animation: ank-sway 1.2s ease-in-out infinite; }
+.ank-celebrate .ank-flower { transform-origin: 50% 100%; animation: ank-bloom 1s ease-out both; }
+.ank-comfort .ank-arm-l { animation: ank-hug-l 3s ease-in-out infinite; }
+.ank-comfort .ank-arm-r { animation: ank-hug-r 3s ease-in-out infinite; }
+.ank-comfort .ank-plant { animation: ank-sway 4s ease-in-out infinite; }
+.ank-glow { animation: ank-glow 3s ease-in-out infinite; }
+.ank-think .ank-arm-r { animation: ank-chin 2.6s ease-in-out infinite; }
+.ank-sleepy .ank-crown, .ank-sleepy .ank-arm-r { animation: ank-droop 4s ease-in-out infinite; }
+.ank-sleepy .ank-arm-l { transform: rotate(-18deg); }
+.ank-z { animation: ank-z 2.4s ease-out infinite; }
+
+/* Cloud thought bubble: an oval with puffs on its edge and two trail circles down to Ankur. */
+.ank-cloud {
+  position: relative;
+  isolation: isolate;
+  display: grid;
+  place-items: center;
+  width: 200px;
+  min-height: 120px;
+  padding: 30px;
+  border-radius: 50%;
+  background: var(--color-surface);
+  filter: drop-shadow(0 10px 16px rgb(27 21 48 / 0.1));
+  font-weight: 700;
+  text-align: center;
+  transform-origin: 0% 100%;
+  animation: ank-pop 0.5s cubic-bezier(0.3, 1.6, 0.5, 1) both;
+}
+.ank-cloud > .ank-line, .ank-cloud > .ank-dots { grid-area: 1 / 1; }
+.ank-puff, .ank-trail { position: absolute; background: var(--color-surface); border-radius: 50%; }
+.ank-puff { z-index: -1; translate: -50% -50%; }
+.ank-trail-1 { width: 18px; height: 18px; left: -2px; bottom: -14px; }
+.ank-trail-2 { width: 10px; height: 10px; left: -18px; bottom: -30px; }
+.ank-dots { display: flex; gap: 5px; }
+.ank-dots i { width: 8px; height: 8px; border-radius: 50%; background: var(--color-muted); animation: ank-dot 1s ease-in-out infinite; }
+.ank-dots i:nth-child(2) { animation-delay: 0.15s; }
+.ank-dots i:nth-child(3) { animation-delay: 0.3s; }
+.ank-line { animation: ank-line-in 0.3s ease-out both; }
+@keyframes ank-pop { from { transform: scale(0.6); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes ank-dot { 0%, 100% { transform: translateY(0); opacity: 0.35; } 50% { transform: translateY(-4px); opacity: 0.9; } }
+@keyframes ank-line-in { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .ankur *, .ank-cloud, .ank-cloud * { animation: none !important; }
+}

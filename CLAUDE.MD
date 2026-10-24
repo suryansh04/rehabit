@@ -27,7 +27,7 @@ An AI phone call reminds the patient just before each daily session.
    - Finger isolation: same as Classic, with fingertip pads 1 to 5 only. No palm.
    - Memory sequence: pads glow in order. The patient repeats the order. Start with 3 pads. Each correct round adds 1 pad. The game stops after 2 mistakes.
    - Endurance: tap the glowing pad as many times as you can in 60 seconds. Count correct taps.
-2. **Voice coach**: Hinglish encouragement during play. We make the clips one time with Sarvam TTS and save them as audio files. The game plays them on these events:
+2. **Voice coach**: Hinglish encouragement during play. We make the clips one time on the ElevenLabs website (free plan, a young and cheerful Hindi female voice) and save them as `frontend/public/clips/<id>.mp3` (`start`, `streak`, `miss`, `last5`, `end`). The game plays them on these events:
 
    | When | Clip |
    | --- | --- |
@@ -40,6 +40,7 @@ An AI phone call reminds the patient just before each daily session.
 4. **Reminder call**: a few minutes before the daily session time, the backend starts an AI call. The call tells the patient a game session is coming up.
 5. **WhatsApp**: daily summary and alerts to family. Alerts: missed session (no game within 1 hour after session time) and low mood.
 6. **Therapist dashboard**: progress per mode, mood vs reaction time, session history.
+7. **Ankur, the mascot**: a small sprout in a clay pot. He speaks the coach lines in a round cloud thought bubble (thinking dots first, then the line). He reacts to game events: watching while a coin glows, happy on a good tap, cheer on a streak, encourage on a miss (never sad), push on the last 5 taps, celebrate (a flower blooms) when a game ends, comfort on a low mood. Patient screens only, not the dashboard. Design: `design/round-05-mascot/`.
 
 ## Hardware
 
@@ -70,7 +71,7 @@ An AI phone call reminds the patient just before each daily session.
 | Device link | WebSocket, JSON messages |
 | Backend | FastAPI (Python) |
 | Frontend | React, TypeScript, Tailwind, Vite |
-| Voice coach | Sarvam TTS (Bulbul) |
+| Voice coach | ElevenLabs clips, made once on the website |
 | AI companion | Sarvam Voice Agents (web SDK in the browser) |
 | Reminder call | Sarvam Voice Agents (Instant Outbound API) |
 | WhatsApp | OmniDimension or Meta WhatsApp Cloud API (not final). Use one `send_whatsapp()` function. |
@@ -136,7 +137,7 @@ SARVAM_ORG_ID=
 SARVAM_WORKSPACE_ID=
 SARVAM_COMPANION_APP_ID=
 SARVAM_REMINDER_APP_ID=
-SARVAM_REMINDER_APP_VERSION=
+SARVAM_REMINDER_APP_VERSION=1
 SARVAM_CONNECTION_ID=
 SARVAM_AGENT_PHONE_NUMBER=
 OMNIDIM_API_KEY=
