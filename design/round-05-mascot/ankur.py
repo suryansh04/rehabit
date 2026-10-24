@@ -160,14 +160,18 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 .mock main{display:grid;grid-template-columns:1fr 520px 1fr;align-items:center;gap:20px;padding:0 32px 32px}
 .mock .left{display:flex;flex-direction:column;gap:6px}
 .mock .speech{display:flex;align-items:flex-start;margin-top:34px}
-.think{position:relative;isolation:isolate;margin:-26px 0 0 -10px;background:var(--sf);border-radius:30px;padding:14px 20px;
-  filter:drop-shadow(0 10px 18px rgba(27,21,48,.09));font-weight:700;font-size:16px;max-width:220px;display:grid;
+.think{position:relative;isolation:isolate;margin:-20px 0 0 4px;background:var(--sf);border-radius:40px;padding:16px 24px;
+  filter:drop-shadow(0 10px 16px rgba(27,21,48,.10));font-weight:700;font-size:16px;max-width:230px;display:grid;
   transform-origin:0% 100%;animation:pop .5s cubic-bezier(.3,1.6,.5,1) both}
-.think::before,.think::after{content:'';position:absolute;z-index:-1;background:var(--sf);border-radius:50%}
-.think::before{width:44px;height:44px;top:-16px;left:18px} .think::after{width:34px;height:34px;top:-11px;right:26px}
+/* puffs around the edge turn the rounded box into a cloud */
+.think .puff{position:absolute;z-index:-1;background:var(--sf);border-radius:50%}
+.puff.p1{width:54px;height:54px;top:-22px;left:6%} .puff.p2{width:66px;height:66px;top:-30px;left:34%}
+.puff.p3{width:50px;height:50px;top:-18px;right:6%} .puff.p4{width:46px;height:46px;bottom:-16px;left:22%}
+.puff.p5{width:52px;height:52px;bottom:-20px;right:18%} .puff.p6{width:42px;height:42px;left:-16px;top:22%}
+.puff.p7{width:42px;height:42px;right:-16px;top:26%}
 .think>.dots,.think>.line{grid-area:1/1;align-self:center}
 .think em{position:absolute;background:var(--sf);border-radius:50%}
-.think .t1{width:16px;height:16px;left:6px;bottom:-12px} .think .t2{width:9px;height:9px;left:-6px;bottom:-24px}
+.think .t1{width:18px;height:18px;left:-6px;bottom:-26px} .think .t2{width:10px;height:10px;left:-20px;bottom:-40px}
 .dots{display:flex;gap:5px;padding:4px 0} .dots i{width:8px;height:8px;border-radius:50%;background:var(--mu);opacity:.5;animation:dot 1s ease-in-out infinite}
 .dots i:nth-child(2){animation-delay:.15s} .dots i:nth-child(3){animation-delay:.3s}
 .loop .dots{animation:dots-vis 4s infinite} .loop .line{animation:line-vis 4s infinite}
@@ -176,7 +180,7 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 @keyframes dots-vis{0%,28%{opacity:1}34%,100%{opacity:0}}
 @keyframes line-vis{0%,30%{opacity:0;transform:scale(.9)}38%,100%{opacity:1;transform:scale(1)}}
 .bubbles{display:flex;gap:28px;flex-wrap:wrap;margin-top:16px;align-items:flex-start}
-.bubbles .speech{display:flex;align-items:flex-start;background:var(--bg);border:1px solid var(--ln);border-radius:24px;padding:56px 28px 18px}
+.bubbles .speech{display:flex;align-items:flex-start;background:var(--bg);border:1px solid var(--ln);border-radius:24px;padding:64px 36px 18px}
 .count{font:700 80px/1 'Jakarta';letter-spacing:-.04em} .count small{font-size:26px;color:var(--mu);font-weight:500}
 .stat{border-radius:22px;padding:16px 18px} .stat .big{font-size:32px}
 .right{display:flex;flex-direction:column;gap:12px}
@@ -190,7 +194,8 @@ h1{font-size:40px} h2{font-size:24px;margin:44px 0 6px} .lead{color:var(--mu);ma
 def thought(line, loop=True):
     """Thought bubble: thinking dots first, then the coach line pops in."""
     dots = "<span class='dots'><i></i><i></i><i></i></span>"
-    return (f"<div class='think{' loop' if loop else ''}'>{dots}<span class='line'>{line}</span>"
+    puffs = "".join(f"<span class='puff p{i}'></span>" for i in range(1, 8))
+    return (f"<div class='think{' loop' if loop else ''}'>{puffs}{dots}<span class='line'>{line}</span>"
             "<em class='t1'></em><em class='t2'></em></div>")
 
 
