@@ -61,7 +61,7 @@ export function MoodScreen({ onDone }: { onDone: () => void }) {
               )
             })}
           </div>
-          {error && <p className="mt-4 text-miss">We could not save your answer: {error}</p>}
+          {error && <p className="mt-4 text-error">We could not save your answer: {error}</p>}
         </div>
       </main>
     </div>

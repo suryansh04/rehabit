@@ -43,7 +43,7 @@ export function DoneScreen({ result, streak, saveError, onAgain, onMenu }: Props
             <StatTile tone="mint" label="Avg reaction" value={result.avg_reaction_ms || '-'} unit="ms" />
             <StatTile tone="peach" label="Accuracy" value={Math.round(result.accuracy)} unit="%" />
           </div>
-          {saveError && <p className="mb-4 text-miss">We could not save this game: {saveError}</p>}
+          {saveError && <p className="mb-4 text-error">We could not save this game: {saveError}</p>}
           <div className="flex gap-3">
             <Button variant="primary" onClick={onAgain}>Play again</Button>
             <Button onClick={onMenu}>Back to games</Button>
