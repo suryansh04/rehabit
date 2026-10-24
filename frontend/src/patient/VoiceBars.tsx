@@ -13,7 +13,7 @@ export type VoiceState = 'connecting' | 'listening' | 'speaking'
 
 type Props = {
   state: VoiceState
-  // frequency bins (0 to 255): Yash's voice while he speaks, the patient's microphone while he listens
+  // frequency bins (0 to 255): Rehabit AI's voice while he speaks, the patient's microphone while he listens
   read: () => Uint8Array
 }
 

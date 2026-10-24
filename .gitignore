@@ -17,6 +17,10 @@ dist/
 .pio/
 .vscode/
 
+# Local only: design work and planning notes
+design/
+docs/superpowers/
+
 # OS
 .DS_Store
 Thumbs.db

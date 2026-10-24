@@ -53,6 +53,12 @@ export function clockTime(hhmm: string) {
   return `${h % 12 || 12}:${String(m).padStart(2, '0')} ${h < 12 ? 'AM' : 'PM'}`
 }
 
+export const MOOD_LABELS = ['Very low', 'Low', 'Okay', 'Good', 'Very good']
+
+export function moodLabel(score: number) {
+  return MOOD_LABELS[Math.round(score) - 1] ?? '-'
+}
+
 export function firstName(fullName: string) {
   return fullName.split(' ')[0] || fullName
 }

@@ -81,10 +81,10 @@ export function MenuScreen({ name, sessionTime, streak, mode, onPick, onStart, o
           </div>
         </section>
       </main>
-      {/* Ankur is the way into a talk with Yash: tap him, or hold the palm coin */}
+      {/* Ankur is the way into a talk with Rehabit AI: tap him, or hold the palm coin */}
       <button
         onClick={onTalk}
-        aria-label="Talk with Yash"
+        aria-label="Talk with Rehabit AI"
         className="fixed right-8 bottom-6 flex items-end gap-1 transition hover:scale-[1.03] active:scale-[.97]"
       >
         <span className="mb-16">
