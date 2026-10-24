@@ -2,7 +2,6 @@ import httpx
 
 from config import settings
 
-APP_RUNTIME_URL = "https://apps.sarvam.ai/api/app-runtime/"
 OUTBOUND_URL = "https://apps.sarvam.ai/api/outbounds/v1/orgs/{org}/workspaces/{workspace}/outbounds"
 TIMEOUT_S = 20
 
@@ -11,13 +10,6 @@ def _headers() -> dict:
     if not settings.sarvam_api_key:
         raise RuntimeError("SARVAM_API_KEY is missing in .env")
     return {"X-API-Key": settings.sarvam_api_key}
-
-
-async def proxy_get(path: str, query: str) -> httpx.Response:
-    """Forward the companion SDK's signed-URL request and add our key on the way."""
-    url = APP_RUNTIME_URL + path + (f"?{query}" if query else "")
-    async with httpx.AsyncClient(timeout=TIMEOUT_S) as client:
-        return await client.get(url, headers=_headers())
 
 
 async def start_reminder_call() -> str:
