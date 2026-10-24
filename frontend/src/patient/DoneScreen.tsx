@@ -3,6 +3,7 @@ import { Pill, TopBar } from '../shared/TopBar'
 import { TAPS_PER_GAME } from '../shared/config'
 import type { SessionResult } from '../shared/types'
 import { Button, StatTile } from '../shared/ui'
+import { Ankur } from './ankur/Ankur'
 import { COACH_LINES } from './coach'
 import { MODES } from './games/modes'
 
@@ -38,6 +39,7 @@ export function DoneScreen({ result, streak, saveError, onAgain, onMenu }: Props
           </div>
         </Ring>
         <div className="max-w-xl">
+          <Ankur state="celebrate" size={140} />
           <h1 className="text-[44px] font-bold leading-[1.1] tracking-tight">{COACH_LINES.end}</h1>
           <div className="my-6 grid grid-cols-2 gap-3.5">
             <StatTile tone="mint" label="Avg reaction" value={result.avg_reaction_ms || '-'} unit="ms" />

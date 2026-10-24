@@ -7,6 +7,7 @@ import { PALM_PAD, TAPS_PER_GAME } from '../shared/config'
 import { useDevice } from '../shared/device'
 import type { PublicConfig } from '../shared/types'
 import { Bubble, Button } from '../shared/ui'
+import { Ankur } from './ankur/Ankur'
 
 // The SDK asks our backend for a signed URL; the backend adds the Sarvam key.
 const PROXY_BASE_URL = '/api/sarvam/'
@@ -88,6 +89,7 @@ export function TalkScreen({ config, onEnd }: { config: PublicConfig | null; onE
           <HandBoard hand={hand} size={320} live={PALM_PAD} />
         </Ring>
         <div className="flex max-w-lg flex-col gap-3.5">
+          <Ankur state={state === AgentState.SPEAKING ? 'speak' : 'listen'} size={110} />
           <h1 className="text-[34px] font-bold tracking-tight">{STATUS[state] ?? 'Getting ready...'}</h1>
           <p className="text-muted">Speak in Hindi or English. Take your time.</p>
           {recent.map((line, i) =>

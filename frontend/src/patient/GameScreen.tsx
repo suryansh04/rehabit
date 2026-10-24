@@ -3,7 +3,9 @@ import { Ring } from '../shared/Ring'
 import { Pill, TopBar } from '../shared/TopBar'
 import { useDevice } from '../shared/device'
 import type { Hand, ModeId } from '../shared/types'
-import { Bubble, Button, StatTile } from '../shared/ui'
+import { Button, StatTile } from '../shared/ui'
+import { AnkurSays } from './ankur/ThoughtCloud'
+import { useGameAnkur } from './ankur/useGameAnkur'
 import { COACH_LINES } from './coach'
 import { MODES, type FinishHandler, type GameModel } from './games/modes'
 import { useMemoryGame } from './games/useMemoryGame'
@@ -33,6 +35,7 @@ function MemoryGame({ mode, hand, onFinish, onStop }: GameProps) {
 
 function GameView({ mode, hand, model, onStop }: { mode: ModeId; hand: Hand; model: GameModel; onStop: () => void }) {
   useCoach(model.cue)
+  const ankur = useGameAnkur(model)
   const { counter } = model
 
   return (
@@ -48,11 +51,9 @@ function GameView({ mode, hand, model, onStop }: { mode: ModeId; hand: Hand; mod
             {counter.value}
             {counter.total && <small className="text-3xl font-medium text-muted"> / {counter.total}</small>}
           </span>
-          {model.cue && (
-            <div className="mt-4 max-w-72">
-              <Bubble text={COACH_LINES[model.cue.clip]} from="Your coach" />
-            </div>
-          )}
+          <div className="mt-8">
+            <AnkurSays state={ankur} size={150} text={model.cue ? COACH_LINES[model.cue.clip] : null} sayKey={model.cue?.n} />
+          </div>
         </div>
         <Ring lit={model.ring.lit} total={model.ring.total} size={RING_SIZE}>
           <HandBoard hand={hand} size={HAND_SIZE} live={model.live} flash={model.flash} />
