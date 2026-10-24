@@ -5,7 +5,6 @@ import { PALM_PAD, TAPS_PER_GAME } from '../shared/config'
 import { useDevice, useDeviceEvents } from '../shared/device'
 import type { ModeId } from '../shared/types'
 import { Button } from '../shared/ui'
-import { AnkurSays } from './ankur/ThoughtCloud'
 import { MODE_ORDER, MODES } from './games/modes'
 
 const RING_SIZE = 500
@@ -22,7 +21,7 @@ type Props = {
 }
 
 export function MenuScreen({ name, sessionTime, streak, mode, onPick, onStart, onTalk }: Props) {
-  const { hand, connected } = useDevice()
+  const { hand } = useDevice()
   useDeviceEvents((event) => {
     if (event.type === 'hold' && event.pad === PALM_PAD) onTalk()
   })
@@ -62,14 +61,7 @@ export function MenuScreen({ name, sessionTime, streak, mode, onPick, onStart, o
               </span>
             </button>
           ))}
-          <div className="mt-auto pt-6">
-            <AnkurSays
-              state={connected ? 'idle' : 'sleepy'}
-              size={110}
-              text={connected ? 'Pick a game. I will cheer for you!' : 'We are reconnecting to the board...'}
-            />
-          </div>
-          <button onClick={onTalk} className="mt-3 flex items-center gap-3.5 rounded-3xl bg-peach p-5 text-left">
+          <button onClick={onTalk} className="mt-auto flex items-center gap-3.5 rounded-3xl bg-peach p-5 text-left">
             <span className="grid size-12 place-items-center rounded-full bg-surface font-bold">{PALM_PAD}</span>
             <span>
               <b className="block">Want to talk?</b>

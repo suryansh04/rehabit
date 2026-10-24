@@ -2,10 +2,11 @@ from datetime import datetime, timedelta
 from typing import Literal
 
 import httpx
-from fastapi import APIRouter, HTTPException, Request, Response
+from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 import db
+import elevenlabs
 import sarvam
 from config import settings
 from whatsapp import send_whatsapp
@@ -59,13 +60,12 @@ async def call_now():
         raise HTTPException(status_code=502, detail=str(error))
 
 
-@router.get("/sarvam/{path:path}")
-async def sarvam_proxy(path: str, request: Request):
+@router.get("/companion/token")
+async def companion_token():
     try:
-        res = await sarvam.proxy_get(path, request.url.query)
+        return {"token": await elevenlabs.conversation_token()}
     except (RuntimeError, httpx.HTTPError) as error:
         raise HTTPException(status_code=502, detail=str(error))
-    return Response(res.content, status_code=res.status_code, media_type=res.headers.get("content-type"))
 
 
 @router.get("/config")
@@ -74,7 +74,4 @@ def public_config():
         "patient_name": settings.patient_name,
         "session_time": settings.session_time,
         "reminder_minutes_before": settings.reminder_minutes_before,
-        "org_id": settings.sarvam_org_id,
-        "workspace_id": settings.sarvam_workspace_id,
-        "companion_app_id": settings.sarvam_companion_app_id,
     }
