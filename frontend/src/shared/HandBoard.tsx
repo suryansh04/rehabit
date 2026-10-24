@@ -1,3 +1,4 @@
+import { useId } from 'react'
 import { PALM_PAD } from './config'
 import type { Hand } from './types'
 
@@ -11,14 +12,17 @@ const FINGERS = [
   [294, 252, 17, 108, 38, 32],
 ] as const
 const PALM =
-  'M170,488 C160,452 150,424 140,392 C128,360 134,322 150,286 L162,236 Q170,214 196,210 ' +
-  'L272,214 Q306,222 308,258 L304,352 C300,406 290,446 280,488 Z'
+  'M182,488 Q162,488 157,470 C148,440 138,420 136,390 C132,352 138,320 152,288 C158,262 160,240 172,224 ' +
+  'Q184,210 204,210 L270,214 Q304,220 308,256 C309,290 306,320 304,352 C301,400 294,440 287,468 Q282,488 262,488 Z'
 const PALM_COIN = [224, 340] as const
 const COIN_AT = 0.8
 const FINGER_COIN_R = 15
 const PALM_COIN_R = 30
 const VIEW = { x: 20, y: 30, w: 350, h: 470 }
 const MIRROR_X = 2 * VIEW.x + VIEW.w
+// Blur then sharpen the alpha: the fingers melt into the palm with round curves instead of sharp corners.
+const SMOOTH_BLUR = 5
+const SMOOTH_ALPHA = '1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 24 -10'
 
 type Finger = (typeof FINGERS)[number]
 
@@ -61,6 +65,8 @@ function coinFill(pad: number, live: Props['live'], flash: Props['flash']) {
 export function HandBoard({ hand, size, live = null, flash = null, dimPalm = false }: Props) {
   const mirror = hand === 'left' ? `translate(${MIRROR_X} 0) scale(-1 1)` : undefined
   const shapes = SHAPES.map((d) => <path key={d} d={d} />)
+  // useId has colons, which break url(#...) references
+  const smooth = `hand-smooth-${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
   return (
     <svg
@@ -69,11 +75,19 @@ export function HandBoard({ hand, size, live = null, flash = null, dimPalm = fal
       role="img"
       aria-label={`${hand} hand board${live ? `, coin ${live} glowing` : ''}`}
     >
+      <defs>
+        <filter id={smooth} x="-10%" y="-10%" width="120%" height="120%">
+          <feGaussianBlur stdDeviation={SMOOTH_BLUR} />
+          <feColorMatrix type="matrix" values={SMOOTH_ALPHA} />
+        </filter>
+      </defs>
       <g transform={mirror}>
-        <g fill="var(--color-hand-line)" stroke="var(--color-hand-line)" strokeWidth={5} strokeLinejoin="round">
+        <g filter={`url(#${smooth})`} fill="var(--color-hand-line)" stroke="var(--color-hand-line)" strokeWidth={8} strokeLinejoin="round">
           {shapes}
         </g>
-        <g fill="var(--color-hand)">{shapes}</g>
+        <g filter={`url(#${smooth})`} fill="var(--color-hand)">
+          {shapes}
+        </g>
       </g>
       {COINS.map(([x, y], i) => {
         const pad = i + 1
