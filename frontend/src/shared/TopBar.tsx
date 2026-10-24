@@ -1,11 +1,7 @@
 import type { ReactNode } from 'react'
 
 export function Logo() {
-  return (
-    <span className="text-2xl font-bold tracking-tight">
-      rehabit<span className="ml-0.5 inline-block size-2.5 rounded-full bg-accent" />
-    </span>
-  )
+  return <img src="/logo.png" alt="Rehabit" className="h-9 w-auto" />
 }
 
 export function Pill({ children }: { children: ReactNode }) {
